@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation 'com.google.dagger:dagger-spi:2.25.2'
+    implementation 'com.google.dagger:dagger:2.25.2'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

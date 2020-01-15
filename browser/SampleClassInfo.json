@@ -1,0 +1,22 @@
+{
+  "Node A": {
+      "method_count": 275,
+      "field_count": 276,
+      "size": 33440
+  },
+  "Node B": {
+      "method_count": 314,
+      "field_count": 176,
+      "size": 41628
+  },
+  "Node C": {
+      "method_count": 70,
+      "field_count": 44,
+      "size": 9993
+  },
+  "Node D": {
+      "method_count": 52,
+      "field_count": 31,
+      "size": 5216
+  }
+}

@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.light-text {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.header {
+  text-align: center;
+}
+
+.binding {
+  cursor: pointer;
+  display: inline-flex;
+  flex-flow:row nowrap;
+  max-width:100%; /* or width:100% if you want the spans to take all available space */    
+}
+
+.binding div {
+  white-space:nowrap;
+}
+
+.binding .text {
+  cursor: pointer;  
+  flex:1;
+  white-space:pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.binding a {
+  color: rgba(0,0,0,0.87) !important;
+}
+
+.binding .text:hover {
+  color: #0288d1 !important;
+}
+
+.bubble {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #ccc;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.node-icon {
+  width: 20px;
+  line-height: 1;
+  font-size: 12px;
+  padding: 3px;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  display: inline-block;
+  border-radius: 4px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.soft-link {
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: underline;
+}
+
+.material-icons {
+  margin-left: 5px;
+}
+
+.card:not(:first-child) {
+  margin-top: 0px;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.graph-spinner {
+  display: inline-block;
+  padding: 50px;
+}
+
+.textbox { 
+  margin-top: 9px !important;
+  text-align: center !important;
+  border-color: hsl(0,0%,80%)  !important;
+  border-radius: 4px !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+  line-height: 28px !important;
+  font-size: 15px !important;
+  color: hsl(0,0%,20%) !important;
+  height: 43px !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.textbox::placeholder { 
+  color: hsl(0,0%,20%) !important;
+}
+
+.dropdown-content a {
+  color: hsl(0,0%,20%) !important;  
+}
+
+.modal h4 {
+  font-size: 24px;
+  font-weight: 300;  
+}

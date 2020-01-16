@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.TypeElement;
@@ -15,6 +16,7 @@ import com.google.common.base.Joiner;
 import com.squareup.javapoet.ClassName;
 import dagger.model.Binding;
 import dagger.model.BindingGraph;
+import dagger.model.BindingGraph.ComponentNode;
 import dagger.model.BindingGraph.Node;
 import dagger.model.DependencyRequest;
 import dagger.spi.BindingGraphPlugin;
@@ -79,31 +81,34 @@ public class BindingGraphJsonGenerator implements BindingGraphPlugin {
                     writer.println("            \"scope\": \"" + binding.scope().get().scopeAnnotation() + "\",");
                 }
 
-                // begin dependencies
-                writer.println("            \"dependencies\": [");
-                Iterator<DependencyRequest> dependencies = binding.dependencies().iterator();
-                while (dependencies.hasNext()) {
-                    DependencyRequest dependencyRequest = dependencies.next();
-                    writer.println("                {");
-                    writer.println("                \"key\": \"" + escape(dependencyRequest.key().toString()) + "\",");
-                    writer.println("                \"kind\": \"" + dependencyRequest.kind() + "\",");
-                    if (dependencyRequest.requestElement().isPresent()) {
-                        writer.println("                \"element\": \"" +
-                                dependencyRequest.requestElement().get() + "\"");
-                    } else {
-                        writer.println("                \"element\": null");
-                    }
-                    writer.print("                }");
-                    if (dependencies.hasNext()) {
-                        writer.println(',');
-                    } else {
-                        writer.println();
-                    }
-                }
-                // end dependencies
-                writer.println("            ]");
+                printDependencies(writer, binding.dependencies());
 
                 // end binding
+                writer.print("        }");
+                if (nodes.hasNext()) {
+                    writer.println(',');
+                } else {
+                    writer.println();
+                }
+            } else if (node instanceof ComponentNode) {
+                // begin component
+                ComponentNode componentNode = (ComponentNode) node;
+                writer.println("        {");
+                writer.println("            \"key\": \"" + componentNode.componentPath().currentComponent()+ "\",");
+                if (!componentNode.componentPath().atRoot()) {
+                    writer.println("            \"component\": \"" + componentNode.componentPath()
+                            .rootComponent() + "\",");
+                }
+                writer.println("            \"subcomponent\": \"" + componentNode.isSubcomponent()+ "\",");
+                writer.println("            \"related_components\": \"" + componentNode.componentPath().components()+ "\",");
+
+                if (!componentNode.scopes().isEmpty()) {
+                    writer.println("            \"scopes\": \"" + componentNode.scopes() + "\",");
+                }
+
+                printDependencies(writer, componentNode.entryPoints());
+
+                // end component
                 writer.print("        }");
                 if (nodes.hasNext()) {
                     writer.println(',');
@@ -115,6 +120,35 @@ public class BindingGraphJsonGenerator implements BindingGraphPlugin {
         writer.println("    ]");
 
         writer.println("}");
+    }
+
+    /**
+     * Adds {@link DependencyRequest} to the writer
+     */
+    private void printDependencies(PrintWriter writer, Set<DependencyRequest> dependencyRequests) {
+        // begin dependencies
+        writer.println("            \"dependencies\": [");
+        Iterator<DependencyRequest> dependencies = dependencyRequests.iterator();
+        while (dependencies.hasNext()) {
+            DependencyRequest dependencyRequest = dependencies.next();
+            writer.println("                {");
+            writer.println("                \"key\": \"" + escape(dependencyRequest.key().toString()) + "\",");
+            writer.println("                \"kind\": \"" + dependencyRequest.kind() + "\",");
+            if (dependencyRequest.requestElement().isPresent()) {
+                writer.println("                \"element\": \"" +
+                        dependencyRequest.requestElement().get() + "\"");
+            } else {
+                writer.println("                \"element\": null");
+            }
+            writer.print("                }");
+            if (dependencies.hasNext()) {
+                writer.println(',');
+            } else {
+                writer.println();
+            }
+        }
+        // end dependencies
+        writer.println("            ]");
     }
 
     private String escape(String string) {

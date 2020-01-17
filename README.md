@@ -7,7 +7,7 @@ Dagger Browser is a progressive web app for easily navigating a project's Dagger
 
 ## Trying a sample
 
-Check out the [demo site](../../../../pages/Snapchat/dagger-browser/plaid) built from the open source 
+Check out the [demo site](https://snapchat.github.io/dagger-browser/plaid) built from the open source 
 [Plaid](https://github.com/android/plaid) app.
 
 The [plugin/sample](plugin/sample)

@@ -1,3 +1,0 @@
-rootProject.name='Dagger Browser'
-include ':sample'
-include ':lib'

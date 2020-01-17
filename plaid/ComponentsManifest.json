@@ -1,0 +1,1892 @@
+{"components": [
+{
+    "name": "io.plaidapp.core.dagger.CoreComponent",
+    "nodes": [
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.CoreComponent",
+            "module": "io.plaidapp.core.dagger.CoreDataModule",
+            "dependencies": [
+                {
+                "key": "okhttp3.logging.HttpLoggingInterceptor",
+                "kind": "INSTANCE",
+                "element": "interceptor"
+                }
+            ]
+        },
+        {
+            "key": "okhttp3.logging.HttpLoggingInterceptor",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.CoreComponent",
+            "module": "io.plaidapp.core.dagger.CoreDataModule",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "com.google.gson.Gson",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.CoreComponent",
+            "module": "io.plaidapp.core.dagger.CoreDataModule",
+            "scope": "@javax.inject.Singleton",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "retrofit2.converter.gson.GsonConverterFactory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.CoreComponent",
+            "module": "io.plaidapp.core.dagger.CoreDataModule",
+            "scope": "@javax.inject.Singleton",
+            "dependencies": [
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "gson"
+                }
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.core.designernews.data.votes.UpvoteStoryService",
+            "kind": "MEMBERS_INJECTION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "service"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+                "kind": "INSTANCE",
+                "element": "repository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "client"
+                },
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "gson"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "localSource"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "remoteSource"
+                }
+            ]
+        },
+        {
+            "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "INSTANCE",
+                "element": "upstream"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "tokenHolder"
+                }
+            ]
+        },
+        {
+            "key": "com.google.gson.Gson",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "sharedPreferences"
+                }
+            ]
+        },
+        {
+            "key": "android.content.SharedPreferences",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "module": "io.plaidapp.core.dagger.SharedPreferencesModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "prefs"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.core.dagger.designernews.UpvoteStoryServiceComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "tokenLocalDataSource"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "service"
+                }
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.dagger.HomeComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.ui.HomeActivity",
+            "kind": "MEMBERS_INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.data.prefs.SourcesRepository",
+                "kind": "INSTANCE",
+                "element": "sourcesRepository"
+                },
+                {
+                "key": "io.plaidapp.core.ui.ConnectivityChecker",
+                "kind": "INSTANCE",
+                "element": "connectivityChecker"
+                },
+                {
+                "key": "io.plaidapp.ui.HomeViewModel",
+                "kind": "INSTANCE",
+                "element": "viewModel"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.prefs.SourcesRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.SourcesRepositoryModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "android.content.Context",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.ui.ConnectivityChecker",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.dagger.HomeModule",
+            "dependencies": [
+                {
+                "key": "android.app.Activity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.ui.HomeViewModel",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.dagger.HomeModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.ui.HomeViewModelFactory",
+                "kind": "INSTANCE",
+                "element": "factory"
+                },
+                {
+                "key": "androidx.fragment.app.FragmentActivity",
+                "kind": "INSTANCE",
+                "element": "fragmentActivity"
+                }
+            ]
+        },
+        {
+            "key": "android.content.Context",
+            "kind": "DELEGATE",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.dagger.HomeModule",
+            "dependencies": [
+                {
+                "key": "android.app.Activity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "android.app.Activity",
+            "kind": "DELEGATE",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.dagger.HomeModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.ui.HomeActivity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.ui.HomeActivity",
+            "kind": "BOUND_INSTANCE",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.ui.HomeViewModelFactory",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.data.DataManager",
+                "kind": "INSTANCE",
+                "element": "dataManager"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+                "kind": "INSTANCE",
+                "element": "designerNewsLoginRepository"
+                },
+                {
+                "key": "io.plaidapp.core.data.prefs.SourcesRepository",
+                "kind": "INSTANCE",
+                "element": "sourcesRepository"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "dispatcherProvider"
+                }
+            ]
+        },
+        {
+            "key": "androidx.fragment.app.FragmentActivity",
+            "kind": "DELEGATE",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.dagger.HomeModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.ui.HomeActivity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.DataManager",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.DataManagerModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.domain.LoadStoriesUseCase",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.domain.SearchStoriesUseCase",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                },
+                {
+                "key": "io.plaidapp.core.producthunt.domain.LoadPostsUseCase",
+                "kind": "INSTANCE",
+                "element": "arg2"
+                },
+                {
+                "key": "io.plaidapp.core.dribbble.data.ShotsRepository",
+                "kind": "INSTANCE",
+                "element": "arg3"
+                },
+                {
+                "key": "io.plaidapp.core.data.prefs.SourcesRepository",
+                "kind": "INSTANCE",
+                "element": "arg4"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "arg5"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.domain.LoadStoriesUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.stories.StoriesRepository",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.domain.SearchStoriesUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.stories.StoriesRepository",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.producthunt.domain.LoadPostsUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.producthunt.data.api.ProductHuntRepository",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.ShotsRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.SearchRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.stories.StoriesRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.stories.StoriesRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.stories.StoriesRemoteDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "com.google.gson.Gson",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "android.content.SharedPreferences",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.SharedPreferencesModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.producthunt.data.api.ProductHuntRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.ProductHuntModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.producthunt.data.ProductHuntRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.producthunt.data.ProductHuntRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.producthunt.data.api.ProductHuntService",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.producthunt.data.api.ProductHuntService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.ProductHuntModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "@io.plaidapp.core.dagger.ProductHuntApi okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "retrofit2.converter.gson.GsonConverterFactory",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                },
+                {
+                "key": "io.plaidapp.core.data.api.DeEnvelopingConverter",
+                "kind": "INSTANCE",
+                "element": "arg2"
+                }
+            ]
+        },
+        {
+            "key": "@io.plaidapp.core.dagger.ProductHuntApi okhttp3.OkHttpClient",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.ProductHuntModule",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "retrofit2.converter.gson.GsonConverterFactory",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.api.DeEnvelopingConverter",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.SearchRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchService",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchConverter.Factory",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchConverter.Factory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dagger.HomeComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.dribbble.ui.shot.ShotActivity",
+            "kind": "MEMBERS_INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.dribbble.ui.shot.ShotViewModel",
+                "kind": "INSTANCE",
+                "element": "viewModel"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.dribbble.ui.shot.ShotViewModel",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.dribbble.dagger.DribbbleModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.dribbble.ui.shot.ShotViewModelFactory",
+                "kind": "INSTANCE",
+                "element": "factory"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.dribbble.ui.shot.ShotViewModelFactory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.dribbble.dagger.DribbbleModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.ShotsRepository",
+                "kind": "INSTANCE",
+                "element": "shotsRepository"
+                },
+                {
+                "key": "io.plaidapp.dribbble.domain.CreateShotUiModelUseCase",
+                "kind": "INSTANCE",
+                "element": "createShotUiModelUseCase"
+                },
+                {
+                "key": "io.plaidapp.dribbble.domain.GetShareShotInfoUseCase",
+                "kind": "INSTANCE",
+                "element": "shareShotInfoUseCase"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "coroutinesDispatcherProvider"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.ShotsRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.SearchRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.dribbble.domain.CreateShotUiModelUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.util.HtmlParser",
+                "kind": "INSTANCE",
+                "element": "htmlParser"
+                },
+                {
+                "key": "io.plaidapp.dribbble.ui.shot.ShotStyler",
+                "kind": "INSTANCE",
+                "element": "styler"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "dispatcherProvider"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.dribbble.domain.GetShareShotInfoUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.util.ImageUriProvider",
+                "kind": "INSTANCE",
+                "element": "imageUriProvider"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.SearchRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchService",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchConverter.Factory",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchConverter.Factory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.util.HtmlParser",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.dribbble.dagger.DribbbleModule",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.dribbble.ui.shot.ShotStyler",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+                {
+                "key": "android.content.Context",
+                "kind": "INSTANCE",
+                "element": "context"
+                }
+            ]
+        },
+        {
+            "key": "android.content.Context",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.dribbble.dagger.DribbbleModule",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.util.ImageUriProvider",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "dependencies": [
+                {
+                "key": "android.content.Context",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.util.FileAuthority",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.util.FileAuthority",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleComponent",
+            "module": "io.plaidapp.dribbble.dagger.DribbbleModule",
+            "dependencies": [
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.dribbble.dagger.DribbbleSearchComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.core.interfaces.SearchDataSourceFactory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleSearchComponent",
+            "module": "io.plaidapp.dribbble.dagger.SearchDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.ShotsRepository",
+                "kind": "INSTANCE",
+                "element": "repository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.ShotsRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleSearchComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.SearchRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.SearchRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleSearchComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchService",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleSearchComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchConverter.Factory",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleSearchComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.dribbble.data.search.DribbbleSearchConverter.Factory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.dribbble.dagger.DribbbleSearchComponent",
+            "module": "io.plaidapp.core.dagger.dribbble.DribbbleDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.about.dagger.AboutComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.about.ui.AboutActivity",
+            "kind": "MEMBERS_INJECTION",
+            "component": "io.plaidapp.about.dagger.AboutComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.about.ui.model.AboutViewModelFactory",
+                "kind": "INSTANCE",
+                "element": "aboutViewModelFactory"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.about.ui.model.AboutViewModelFactory",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.about.dagger.AboutComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.about.ui.AboutStyler",
+                "kind": "INSTANCE",
+                "element": "aboutStyler"
+                },
+                {
+                "key": "android.content.res.Resources",
+                "kind": "INSTANCE",
+                "element": "resources"
+                },
+                {
+                "key": "in.uncod.android.bypass.Markdown",
+                "kind": "INSTANCE",
+                "element": "markdown"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.about.ui.AboutStyler",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.about.dagger.AboutComponent",
+            "module": "io.plaidapp.about.dagger.AboutActivityModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "android.content.res.Resources",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.about.dagger.AboutComponent",
+            "module": "io.plaidapp.about.dagger.AboutActivityModule",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "in.uncod.android.bypass.Markdown",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.about.dagger.AboutComponent",
+            "module": "io.plaidapp.core.dagger.MarkdownModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.search.dagger.SearchComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.search.ui.SearchActivity",
+            "kind": "MEMBERS_INJECTION",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.search.ui.SearchViewModel",
+                "kind": "INSTANCE",
+                "element": "viewModel"
+                },
+                {
+                "key": "@io.plaidapp.core.dagger.qualifier.IsPocketInstalled java.lang.Boolean",
+                "kind": "INSTANCE",
+                "element": "pocketInstalled"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.search.ui.SearchViewModel",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "module": "io.plaidapp.search.dagger.SearchModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.search.ui.SearchViewModelFactory",
+                "kind": "INSTANCE",
+                "element": "factory"
+                },
+                {
+                "key": "androidx.appcompat.app.AppCompatActivity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "@io.plaidapp.core.dagger.qualifier.IsPocketInstalled java.lang.Boolean",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "module": "io.plaidapp.search.dagger.SearchModule",
+            "dependencies": [
+                {
+                "key": "android.app.Activity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.search.ui.SearchViewModelFactory",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.search.domain.SearchDataSourceFactoriesRegistry",
+                "kind": "INSTANCE",
+                "element": "registry"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "dispatcherProvider"
+                }
+            ]
+        },
+        {
+            "key": "androidx.appcompat.app.AppCompatActivity",
+            "kind": "DELEGATE",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "module": "io.plaidapp.search.dagger.SearchModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.search.ui.SearchActivity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.search.domain.SearchDataSourceFactoriesRegistry",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "dependencies": [
+                {
+                "key": "java.util.Set<io.plaidapp.core.interfaces.SearchDataSourceFactory>",
+                "kind": "PROVIDER",
+                "element": "defaultFactories"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "java.util.Set<io.plaidapp.core.interfaces.SearchDataSourceFactory>",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "module": "io.plaidapp.search.dagger.SearchModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "android.app.Activity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "android.app.Activity",
+            "kind": "DELEGATE",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "module": "io.plaidapp.search.dagger.SearchModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.search.ui.SearchActivity",
+                "kind": "INSTANCE",
+                "element": "activity"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.search.ui.SearchActivity",
+            "kind": "BOUND_INSTANCE",
+            "component": "io.plaidapp.search.dagger.SearchComponent",
+            "dependencies": [
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.designernews.dagger.StoryComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.designernews.ui.story.StoryActivity",
+            "kind": "MEMBERS_INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.ui.story.StoryViewModel",
+                "kind": "INSTANCE",
+                "element": "viewModel"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+                "kind": "INSTANCE",
+                "element": "loginRepository"
+                },
+                {
+                "key": "in.uncod.android.bypass.Markdown",
+                "kind": "INSTANCE",
+                "element": "markdown"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.ui.story.StoryViewModel",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.designernews.dagger.StoryModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.ui.story.StoryViewModelFactory",
+                "kind": "INSTANCE",
+                "element": "factory"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "in.uncod.android.bypass.Markdown",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.MarkdownModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.ui.story.StoryViewModelFactory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.designernews.dagger.StoryModule",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.domain.GetStoryUseCase",
+                "kind": "INSTANCE",
+                "element": "getStoryUseCase"
+                },
+                {
+                "key": "io.plaidapp.designernews.domain.PostStoryCommentUseCase",
+                "kind": "INSTANCE",
+                "element": "postStoryCommentUseCase"
+                },
+                {
+                "key": "io.plaidapp.designernews.domain.PostReplyUseCase",
+                "kind": "INSTANCE",
+                "element": "postReplyUseCase"
+                },
+                {
+                "key": "io.plaidapp.designernews.domain.GetCommentsWithRepliesAndUsersUseCase",
+                "kind": "INSTANCE",
+                "element": "commentsWithRepliesAndUsersUseCase"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "coroutinesDispatcherProvider"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.domain.GetStoryUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.stories.StoriesRepository",
+                "kind": "INSTANCE",
+                "element": "storiesRepository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.domain.PostStoryCommentUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.data.comments.CommentsRepository",
+                "kind": "INSTANCE",
+                "element": "commentsRepository"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+                "kind": "INSTANCE",
+                "element": "loginRepository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.domain.PostReplyUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.data.comments.CommentsRepository",
+                "kind": "INSTANCE",
+                "element": "commentsRepository"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+                "kind": "INSTANCE",
+                "element": "loginRepository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.domain.GetCommentsWithRepliesAndUsersUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.domain.GetCommentsWithRepliesUseCase",
+                "kind": "INSTANCE",
+                "element": "getCommentsWithReplies"
+                },
+                {
+                "key": "io.plaidapp.designernews.data.users.UserRepository",
+                "kind": "INSTANCE",
+                "element": "userRepository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.stories.StoriesRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.stories.StoriesRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.stories.StoriesRemoteDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "com.google.gson.Gson",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "android.content.SharedPreferences",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.core.dagger.SharedPreferencesModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.data.comments.CommentsRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.designernews.dagger.StoryModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.data.comments.CommentsRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "dataSource"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.data.comments.CommentsRemoteDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.designernews.dagger.StoryModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "service"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.data.api.DesignerNewsService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.designernews.dagger.DataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "client"
+                },
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "gson"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.domain.GetCommentsWithRepliesUseCase",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.data.comments.CommentsRepository",
+                "kind": "INSTANCE",
+                "element": "commentsRepository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.data.users.UserRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "module": "io.plaidapp.designernews.dagger.StoryModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.data.users.UserRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "dataSource"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.data.users.UserRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.StoryComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "service"
+                }
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.designernews.dagger.LoginComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.designernews.ui.login.LoginActivity",
+            "kind": "MEMBERS_INJECTION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.designernews.ui.login.LoginViewModel",
+                "kind": "INSTANCE",
+                "element": "viewModel"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.designernews.ui.login.LoginViewModel",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+                "kind": "INSTANCE",
+                "element": "loginRepository"
+                },
+                {
+                "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+                "kind": "INSTANCE",
+                "element": "dispatcherProvider"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.data.CoroutinesDispatcherProvider",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginLocalDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.LoginRemoteDataSource",
+            "kind": "INJECTION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "android.content.SharedPreferences",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "module": "io.plaidapp.core.dagger.SharedPreferencesModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "com.google.gson.Gson",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.designernews.dagger.LoginComponent",
+            "dependencies": [
+            ]
+        }
+    ]
+}
+,
+{
+    "name": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+    "nodes": [
+        {
+            "key": "io.plaidapp.core.interfaces.SearchDataSourceFactory",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "module": "io.plaidapp.designernews.dagger.SearchDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.stories.StoriesRepository",
+                "kind": "INSTANCE",
+                "element": "repository"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.stories.StoriesRepository",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.stories.StoriesRemoteDataSource",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.stories.StoriesRemoteDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.api.DesignerNewsService",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+                "kind": "LAZY",
+                "element": "arg0"
+                },
+                {
+                "key": "com.google.gson.Gson",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "dependencies": [
+                {
+                "key": "okhttp3.OkHttpClient",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                },
+                {
+                "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+                "kind": "INSTANCE",
+                "element": "arg1"
+                }
+            ]
+        },
+        {
+            "key": "com.google.gson.Gson",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "okhttp3.OkHttpClient",
+            "kind": "COMPONENT_PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "dependencies": [
+            ]
+        },
+        {
+            "key": "io.plaidapp.core.designernews.data.login.AuthTokenLocalDataSource",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "module": "io.plaidapp.core.dagger.designernews.DesignerNewsDataModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+                {
+                "key": "android.content.SharedPreferences",
+                "kind": "INSTANCE",
+                "element": "arg0"
+                }
+            ]
+        },
+        {
+            "key": "android.content.SharedPreferences",
+            "kind": "PROVISION",
+            "component": "io.plaidapp.designernews.dagger.DesignerNewsSearchComponent",
+            "module": "io.plaidapp.designernews.dagger.DesignerNewsPreferencesModule",
+            "scope": "@io.plaidapp.core.dagger.scope.FeatureScope",
+            "dependencies": [
+            ]
+        }
+    ]
+}
+]}

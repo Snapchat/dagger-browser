@@ -17,11 +17,15 @@ export default class ClassSizeService implements WeightService {
   }
 
   getWeight(componentName: string, node?: string): Weight | undefined {
-    // TODO: add ability to compute the weight for the whole component
     const classSize = node ? this.getClassSize(node) : 0;
     if (classSize) {
+      var memorySizeKb = classSize.getMemorySize() / 1024;
+      if (memorySizeKb > 1) {
+        memorySizeKb = Math.round(memorySizeKb);
+      }
+
       return {
-        value: Math.round(classSize.getMemorySize() / 1024),
+        value: memorySizeKb,
         largeThreshold: LARGE_THRESHOLD_KB,
         smallThreshold: SMALL_THRESHOLD_KB,
         summary: classSize.getSummary(),

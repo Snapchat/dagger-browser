@@ -18,7 +18,7 @@ const NodeWeight = ({ weight }: Props) => {
           className={classNames("unselectable", "bubble", getWeightColor(weight))}
           title={weight.summary}
         >
-          {weight.value} {weight.unit ? weight.unit : ''}
+          {Number.isInteger(weight.value) ? weight.value : weight.value.toFixed(1)} {weight.unit ? weight.unit : ''}
         </span>
       }
     </span>

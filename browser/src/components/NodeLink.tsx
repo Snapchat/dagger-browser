@@ -13,7 +13,9 @@ type Props = {
 };
 
 function getDisplayName(key: string): string {
-  return key
+  var attribution = key.substring(0, key.lastIndexOf(')') + 1)
+  var className = key.substring(key.lastIndexOf('.') + 1)
+  return (attribution + " " + className)
     .replace("java.util.", "")
     .replace("java.lang.", "")
     .replace("javax.inject.", "")
@@ -37,11 +39,10 @@ const NodeLink: React.FC<Props> = ({
         <NodeIcon kind={kind || node.kind} />
         {scoped && <span className="light-text">{scope}&nbsp;</span>}
         {getDisplayName(node.key)}&nbsp;
-      </div>
-      <div>
         <CodeLink link={node.key} />
         <NodeWeight weight={weight} />
       </div>
+
     </div>
   </div>);
 

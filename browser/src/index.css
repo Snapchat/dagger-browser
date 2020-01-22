@@ -23,7 +23,7 @@ code {
 .binding {
   cursor: pointer;
   display: inline-flex;
-  flex-flow:row nowrap;
+  flex-flow: row nowrap;
   max-width:100%; /* or width:100% if you want the spans to take all available space */    
 }
 
@@ -34,9 +34,9 @@ code {
 .binding .text {
   cursor: pointer;  
   flex:1;
-  white-space:pre;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .binding a {

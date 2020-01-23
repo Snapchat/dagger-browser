@@ -13,7 +13,7 @@ sourceCompatibility = "8"
 targetCompatibility = "8"
 buildscript {
     ext.kotlin_version = '1.3.61'
-    ext.dagger_version = '2.25.2'
+    ext.dagger_version = '2.25.4'
     ext.moshi_version = '1.9.2'
 
     repositories {

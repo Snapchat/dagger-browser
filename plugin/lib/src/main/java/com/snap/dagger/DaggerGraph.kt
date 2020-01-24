@@ -29,7 +29,8 @@ data class DaggerBinding(
     val component: String,
     val module: String?,
     val scope: String?,
-    val dependencies: List<DaggerDependencyRequest>
+    val dependencies: List<DaggerDependencyRequest>,
+    val adjacentNodes: List<String>?
 ) : DaggerNode()
 
 sealed class DaggerNode

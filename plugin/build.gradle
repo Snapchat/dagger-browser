@@ -11,11 +11,14 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+subprojects {
+  group = GROUP
+  version = VERSION_NAME
+
+  repositories {
+    google()
+    jcenter()
+  }
 }
 
 task clean(type: Delete) {

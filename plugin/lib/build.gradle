@@ -36,3 +36,5 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

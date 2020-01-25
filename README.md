@@ -29,7 +29,7 @@ allprojects {
   }
 }
 dependencies {
-  implementation "com.snap.daggerbrowser:daggerbrowser-processor:0.6"
+  kapt "com.snap.daggerbrowser:daggerbrowser-processor:0.6"
 }  
 ```
 2. Build your project. The plugin will generate json files for each Dagger component.

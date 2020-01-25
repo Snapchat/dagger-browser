@@ -101,6 +101,8 @@ public class BindingGraphJsonGenerator implements BindingGraphPlugin {
                                                         d.requestElement().toString() : null
                                                 )
                                         ).collect(Collectors.toList()),
+                                // add the adjacentNodes for subcomponent_creator. This helps us in
+                                // associating a subcomponent with its factory
                                 binding.kind() == BindingKind.SUBCOMPONENT_CREATOR ?
                                         network.adjacentNodes(binding)
                                                 .stream()

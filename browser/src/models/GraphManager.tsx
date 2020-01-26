@@ -29,7 +29,7 @@ export default class GraphManager {
     [componentName: string]: { [key: string]: Node[] };
   } = {};
 
-  async load(manifestUrl: string): Promise<boolean> {
+  async loadUrl(manifestUrl: string): Promise<boolean> {
     let classInfoUrl = manifestUrl.substring(0, manifestUrl.lastIndexOf("\/") + 1) + "ClassInfo.json";    
 
     try {
@@ -49,6 +49,29 @@ export default class GraphManager {
     this.manifestUrl = manifestUrl;
     this.classInfoUrl = classInfoUrl;
     return true;
+  }
+  
+  async loadFile(manifestFile: File): Promise<boolean> {
+    let manifestResponse = await this.readFileAsync(manifestFile)
+    console.log("WE READ")
+    console.log(manifestResponse)
+    this.componentSet = JSON.parse(manifestResponse) as ComponentSet;
+    this.populateCaches();
+    return true;
+  }
+
+  async readFileAsync(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+
+      reader.onerror = reject;
+
+      reader.readAsText(file);
+    })
   }
 
   getMatches(

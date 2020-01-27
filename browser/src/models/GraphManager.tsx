@@ -53,8 +53,6 @@ export default class GraphManager {
   
   async loadFile(manifestFile: File): Promise<boolean> {
     let manifestResponse = await this.readFileAsync(manifestFile)
-    console.log("WE READ")
-    console.log(manifestResponse)
     this.componentSet = JSON.parse(manifestResponse) as ComponentSet;
     this.populateCaches();
     return true;
@@ -63,13 +61,11 @@ export default class GraphManager {
   async readFileAsync(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       let reader = new FileReader();
-
       reader.onload = () => {
         resolve(reader.result as string);
       };
 
       reader.onerror = reject;
-
       reader.readAsText(file);
     })
   }

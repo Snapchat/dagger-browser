@@ -130,3 +130,16 @@ code {
   font-size: 24px;
   font-weight: 300;  
 }
+
+.full-screen-alert {
+  position:absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 10px;
+  padding-left: 50px;
+  background-color: #ee6e73;
+  font-size:  30px;
+  color: white;
+}

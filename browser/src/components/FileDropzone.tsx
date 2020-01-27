@@ -11,16 +11,16 @@ const FileDropzone: FunctionComponent<Props> = ({ manifestUrl, onFilesSelected, 
     const onDrop = useCallback(onFilesSelected, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    console.log("RENDER THE BLllOCK")
-
     return (
         <div {...getRootProps()}>
-            <input {...getInputProps()} />
+            {/* <input {...getInputProps()} /> */}
             {
                 isDragActive ?
                     (<div>
-                        <p>Drop to load manifest...</p>
                         {children}
+                        <div className="full-screen-alert">
+                            <p>Drop to load manifest...</p>
+                        </div>
                     </div>
                     ) :
 

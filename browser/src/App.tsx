@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import DaggerBrowser from "./components/GraphBrowser";
 import GraphBrowserLoader from "./components/GraphBrowserLoader";
 import { Route, HashRouter } from "react-router-dom";
@@ -62,7 +62,7 @@ class App extends React.Component<any, AppState> {
   }
 
   private onChangeManifestFile(acceptedFiles: File[]) {
-    if (acceptedFiles.length != 1) {
+    if (acceptedFiles.length !== 1) {
       alert("Upload a single ComponentsManifest.json")
       return
     }

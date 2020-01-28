@@ -60,7 +60,7 @@ export default class GraphManager {
 
   async readFileAsync(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = () => {
         resolve(reader.result as string);
       };

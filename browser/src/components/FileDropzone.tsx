@@ -13,7 +13,6 @@ const FileDropzone: FunctionComponent<Props> = ({ manifestUrl, onFilesSelected, 
 
     return (
         <div {...getRootProps()}>
-            {/* <input {...getInputProps()} /> */}
             {
                 isDragActive ?
                     (<div>

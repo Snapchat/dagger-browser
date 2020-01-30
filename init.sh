@@ -20,8 +20,8 @@ main() {
         build_dir=plugin/sample/build
     fi
 
-    echo "Looking for component graph files in $build_dir"
-    `./scripts/mkmanifest.sh browser/public/$MANIFEST_FILENAME`
+    # Build ComponentstManifest.json
+    ./scripts/mkmanifest.sh $build_dir  browser/public/$MANIFEST_FILENAME
  
     # TODO: Generate the class info file
     local class_info_file="build/ClassInfo.json"
@@ -36,7 +36,9 @@ main() {
     pushd browser
     npm install
     popd
-    echo "Init completed."
+
+    echo "Init completed. Run a Browser:"
+    echo "    cd browser; npm run start"
 }
 
 main $@

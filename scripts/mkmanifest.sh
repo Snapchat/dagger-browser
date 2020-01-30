@@ -18,7 +18,9 @@ main() {
         exit 1
     fi
 
-    if [ -z ${out_file:-} ]; then
+    if [ -d "$out_file" ]; then
+        out_file="${out_file}/ComponentsManifest.json"
+    elif [ -z ${out_file:-} ]; then
         out_file="ComponentsManifest.json"
     fi
 

@@ -21,18 +21,23 @@ To build a Dagger Browser site for your project, you'll need to (1) generate jso
 
 To get started:
 
-1. Checkout out the `dagger-browser` project
+1. Add a dependency on `com.snap.daggerbrowser:daggerbrowser-processor` to any Gradle modules in project that process Dagger components:
+```groovy
+allprojects {
+  repositories {
+    mavenCentral()
+  }
+}
+dependencies {
+  kapt "com.snap.daggerbrowser:daggerbrowser-processor:0.6"
+}  
+```
+2. Build your project. The plugin will generate json files for each Dagger component.
+3. Checkout out the `dagger-browser` project
 ```
 $: git clone git@github.com:Snapchat/dagger-browser.git
 ```
-2. Add the Dagger Browser plugin as a gradle module to your project, in `settings.gradle`:
-```
-include ':dagger-browser-processor'
-project(':dagger-browser-processor').projectDir = new File(rootDir, '../dagger-browser/plugin/lib')
-```
-3. Add a dependency on `:dagger-browser-processor` to any Gradle targets that process Dagger components.
-4. Build your project. The plugin will generate json files for each Dagger component.
-5. Build Dagger Browser using your generated json files:
+4. Build Dagger Browser using your generated json files:
 ```
 cd dagger-browser
 ./run.sh ../my_project/

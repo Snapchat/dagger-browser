@@ -4,7 +4,6 @@ import Routes from "../Routes";
 import { LoadManifestModal } from "./LoadManifestModal";
 import React, { useRef } from "react";
 import {Navbar, Icon, NavItem, Dropdown, Divider, Modal, Button} from "react-materialize";
-import WeightServiceManager from "../service/WeightServiceManager";
 
 export interface Props {
   manifestUrl?: string;

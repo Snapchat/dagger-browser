@@ -45,7 +45,7 @@ public class BindingGraphJsonGenerator implements BindingGraphPlugin {
         TypeElement componentElement = bindingGraph.rootComponentNode().componentPath().currentComponent();
         ClassName componentName = ClassName.get(componentElement);
         try {
-            FileObject file = filter.createResource(StandardLocation.CLASS_OUTPUT,
+            FileObject file = filter.createResource(StandardLocation.SOURCE_OUTPUT,
                     componentName.packageName(),
                     Joiner.on('_').join(componentName.simpleNames()) + "_graph.json",
                     componentElement);

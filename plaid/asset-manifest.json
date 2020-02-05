@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/css/main.4829b74f.chunk.css",
-    "main.js": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/js/main.949ab2b4.chunk.js",
-    "main.js.map": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/js/main.949ab2b4.chunk.js.map",
-    "runtime-main.js": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/js/runtime-main.f7e5ae99.js",
-    "runtime-main.js.map": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/js/runtime-main.f7e5ae99.js.map",
-    "static/js/2.a24ba32e.chunk.js": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/js/2.a24ba32e.chunk.js",
-    "static/js/2.a24ba32e.chunk.js.map": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/js/2.a24ba32e.chunk.js.map",
-    "index.html": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/index.html",
-    "precache-manifest.2366b8bb3a96a55b869034b4c88140d1.js": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/precache-manifest.2366b8bb3a96a55b869034b4c88140d1.js",
-    "service-worker.js": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/service-worker.js",
-    "static/css/main.4829b74f.chunk.css.map": "https://github.sc-corp.net/pages/Snapchat/dagger-browser/plaid/static/css/main.4829b74f.chunk.css.map"
+    "main.css": "https://snapchat.github.io/dagger-browser/plaid/static/css/main.4829b74f.chunk.css",
+    "main.js": "https://snapchat.github.io/dagger-browser/plaid/static/js/main.4fa05c25.chunk.js",
+    "main.js.map": "https://snapchat.github.io/dagger-browser/plaid/static/js/main.4fa05c25.chunk.js.map",
+    "runtime-main.js": "https://snapchat.github.io/dagger-browser/plaid/static/js/runtime-main.811e4411.js",
+    "runtime-main.js.map": "https://snapchat.github.io/dagger-browser/plaid/static/js/runtime-main.811e4411.js.map",
+    "static/js/2.a24ba32e.chunk.js": "https://snapchat.github.io/dagger-browser/plaid/static/js/2.a24ba32e.chunk.js",
+    "static/js/2.a24ba32e.chunk.js.map": "https://snapchat.github.io/dagger-browser/plaid/static/js/2.a24ba32e.chunk.js.map",
+    "index.html": "https://snapchat.github.io/dagger-browser/plaid/index.html",
+    "precache-manifest.2588256830ffa65e0db339d8b1fa0218.js": "https://snapchat.github.io/dagger-browser/plaid/precache-manifest.2588256830ffa65e0db339d8b1fa0218.js",
+    "service-worker.js": "https://snapchat.github.io/dagger-browser/plaid/service-worker.js",
+    "static/css/main.4829b74f.chunk.css.map": "https://snapchat.github.io/dagger-browser/plaid/static/css/main.4829b74f.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.f7e5ae99.js",
+    "static/js/runtime-main.811e4411.js",
     "static/js/2.a24ba32e.chunk.js",
     "static/css/main.4829b74f.chunk.css",
-    "static/js/main.949ab2b4.chunk.js"
+    "static/js/main.4fa05c25.chunk.js"
   ]
 }

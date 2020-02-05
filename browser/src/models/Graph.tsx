@@ -18,6 +18,7 @@ export type Node = {
   component?: string;
   kind: string;
   dependencies: Node[];
+  adjacentNodes: string[];
 };
 
 export type Module = {

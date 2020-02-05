@@ -13,6 +13,7 @@ import javax.tools.StandardLocation;
 
 import com.google.common.base.Joiner;
 
+import com.google.common.graph.Network;
 import com.squareup.javapoet.ClassName;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -20,7 +21,10 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory;
 
 import dagger.model.Binding;
 import dagger.model.BindingGraph;
+import dagger.model.BindingGraph.Node;
+import dagger.model.BindingGraph.Edge;
 import dagger.model.BindingGraph.ComponentNode;
+import dagger.model.BindingKind;
 import dagger.spi.BindingGraphPlugin;
 import dagger.spi.DiagnosticReporter;
 
@@ -73,8 +77,8 @@ public class BindingGraphJsonGenerator implements BindingGraphPlugin {
     }
 
     private List<? extends DaggerNode> getGraphNodes(BindingGraph bindingGraph) {
-        return bindingGraph
-                .network()
+        Network<Node, Edge> network = bindingGraph.network();
+        return network
                 .nodes()
                 .stream()
                 .map(node -> {
@@ -96,7 +100,23 @@ public class BindingGraphJsonGenerator implements BindingGraphPlugin {
                                                 d.requestElement().isPresent() ?
                                                         d.requestElement().toString() : null
                                                 )
-                                        ).collect(Collectors.toList())
+                                        ).collect(Collectors.toList()),
+                                // add the adjacentNodes for subcomponent_creator. This helps us in
+                                // associating a subcomponent with its factory
+                                binding.kind() == BindingKind.SUBCOMPONENT_CREATOR ?
+                                        network.adjacentNodes(binding)
+                                                .stream()
+                                                .map(adjacentNode -> {
+                                                    if (adjacentNode instanceof ComponentNode) {
+                                                        return adjacentNode.componentPath()
+                                                                .currentComponent()
+                                                                .toString();
+                                                    } else if (adjacentNode instanceof Binding) {
+                                                        return ((Binding) adjacentNode).key().toString();
+                                                    } else {
+                                                        return null;
+                                                    }
+                                                }).collect(Collectors.toList()) : null
                         );
                     } else if (node instanceof ComponentNode) {
                         ComponentNode componentNode = (ComponentNode)node;

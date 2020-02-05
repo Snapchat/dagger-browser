@@ -5,6 +5,7 @@ import NodeLink from "./NodeLink";
 import Routes from "src/Routes";
 import { GraphSelector } from "./GraphSelector";
 import WeightService from "../service/WeightService";
+import { Node } from "src/models/Graph";
 
 export type Props = {
   graphManager: GraphManager;
@@ -47,6 +48,22 @@ function readableKind(kind: String) {
   return kind
 }
 
+function createdComponent(graphManager: GraphManager, componentName: string, node: Node) {
+  if (!node.adjacentNodes) {
+    return ""
+  }
+  
+  for (var nodeKey of node.adjacentNodes) {
+    var componentNode = graphManager.getNode(componentName, nodeKey);
+    // Node.Kind will be null for ComponentNodes
+    // Node.key == componentName for parent components
+    if (componentNode && !componentNode.kind && nodeKey != componentName) {
+      return nodeKey
+    }
+  }
+  return ""
+}
+
 export function NodeSummary({ graphManager, weightService, componentName, nodeName }: Props) {
   const history = useHistory();
   const node = graphManager.getNode(componentName, nodeName);
@@ -65,6 +82,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
   const bindingKind = readableKind(node.kind)
   const componentSimpleName = componentName.substring(componentName.lastIndexOf('.') + 1)
   const simpleScope = node.scope && node.scope.substring(node.scope.lastIndexOf('.') + 1)
+  const createdComponentKey: string = createdComponent(graphManager, componentName ,node);
 
   return (
     <div className="card">
@@ -111,6 +129,16 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
         <p>
           <span>Type: </span>
           {bindingKind}
+          {createdComponentKey && 
+            <span className="unselectable"> | &nbsp;
+            <Link
+                    className="soft-link"
+                    to={Routes.GraphNode(componentName, createdComponentKey)}
+                  >
+                    {createdComponentKey}
+              </Link>
+              </span>
+            }
         </p>
 
         {node.scope && (

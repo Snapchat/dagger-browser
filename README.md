@@ -1,3 +1,5 @@
+https://img.shields.io/maven-central/v/com.snap.daggerbrowser/daggerbrowser-processor
+
 # Dagger Browser
 
 Dagger Browser is a progressive web app for easily navigating a project's Dagger graph. The graph data is populated from a Dagger [SPI](https://dagger.dev/spi.html) plugin, and the browser is built using
@@ -29,7 +31,7 @@ allprojects {
   }
 }
 dependencies {
-  kapt "com.snap.daggerbrowser:daggerbrowser-processor:0.6"
+  kapt "com.snap.daggerbrowser:daggerbrowser-processor:LATEST_VERSION"
 }  
 ```
 2. Build your project. The plugin will generate json files for each Dagger component.

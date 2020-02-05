@@ -1,5 +1,3 @@
-https://img.shields.io/maven-central/v/com.snap.daggerbrowser/daggerbrowser-processor
-
 # Dagger Browser
 
 Dagger Browser is a progressive web app for easily navigating a project's Dagger graph. The graph data is populated from a Dagger [SPI](https://dagger.dev/spi.html) plugin, and the browser is built using
@@ -23,7 +21,10 @@ To build a Dagger Browser site for your project, you'll need to (1) generate jso
 
 To get started:
 
-1. Add a dependency on `com.snap.daggerbrowser:daggerbrowser-processor` to any Gradle modules in project that process Dagger components:
+1. Look up the latest version of the processor plugin in Maven Central:
+<img src="https://img.shields.io/maven-central/v/com.snap.daggerbrowser/daggerbrowser-processor"/>
+
+2. Add a dependency on `com.snap.daggerbrowser:daggerbrowser-processor` to any Gradle modules in project that process Dagger components:
 ```groovy
 allprojects {
   repositories {
@@ -34,12 +35,12 @@ dependencies {
   kapt "com.snap.daggerbrowser:daggerbrowser-processor:LATEST_VERSION"
 }  
 ```
-2. Build your project. The plugin will generate json files for each Dagger component.
-3. Checkout out the `dagger-browser` project
+3. Build your project. The plugin will generate json files for each Dagger component.
+4. Checkout out the `dagger-browser` project
 ```
 $: git clone git@github.com:Snapchat/dagger-browser.git
 ```
-4. Build Dagger Browser using your generated json files:
+5. Build Dagger Browser using your generated json files:
 ```
 cd dagger-browser
 ./run.sh ../my_project/

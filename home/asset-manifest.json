@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "https://snapchat.github.io/dagger-browser/home/static/css/main.4829b74f.chunk.css",
-    "main.js": "https://snapchat.github.io/dagger-browser/home/static/js/main.5eb5f9df.chunk.js",
-    "main.js.map": "https://snapchat.github.io/dagger-browser/home/static/js/main.5eb5f9df.chunk.js.map",
-    "runtime-main.js": "https://snapchat.github.io/dagger-browser/home/static/js/runtime-main.d46556eb.js",
-    "runtime-main.js.map": "https://snapchat.github.io/dagger-browser/home/static/js/runtime-main.d46556eb.js.map",
-    "static/js/2.a24ba32e.chunk.js": "https://snapchat.github.io/dagger-browser/home/static/js/2.a24ba32e.chunk.js",
-    "static/js/2.a24ba32e.chunk.js.map": "https://snapchat.github.io/dagger-browser/home/static/js/2.a24ba32e.chunk.js.map",
-    "index.html": "https://snapchat.github.io/dagger-browser/home/index.html",
-    "precache-manifest.3a4ad4f41ea413a89d6127e0b297b34e.js": "https://snapchat.github.io/dagger-browser/home/precache-manifest.3a4ad4f41ea413a89d6127e0b297b34e.js",
-    "service-worker.js": "https://snapchat.github.io/dagger-browser/home/service-worker.js",
-    "static/css/main.4829b74f.chunk.css.map": "https://snapchat.github.io/dagger-browser/home/static/css/main.4829b74f.chunk.css.map"
+    "main.css": "http://daggerbrowser.com/home/static/css/main.4829b74f.chunk.css",
+    "main.js": "http://daggerbrowser.com/home/static/js/main.17759984.chunk.js",
+    "main.js.map": "http://daggerbrowser.com/home/static/js/main.17759984.chunk.js.map",
+    "runtime-main.js": "http://daggerbrowser.com/home/static/js/runtime-main.5b26263d.js",
+    "runtime-main.js.map": "http://daggerbrowser.com/home/static/js/runtime-main.5b26263d.js.map",
+    "static/js/2.a24ba32e.chunk.js": "http://daggerbrowser.com/home/static/js/2.a24ba32e.chunk.js",
+    "static/js/2.a24ba32e.chunk.js.map": "http://daggerbrowser.com/home/static/js/2.a24ba32e.chunk.js.map",
+    "index.html": "http://daggerbrowser.com/home/index.html",
+    "precache-manifest.9d20247a2d90160b58596e7fbe66e36f.js": "http://daggerbrowser.com/home/precache-manifest.9d20247a2d90160b58596e7fbe66e36f.js",
+    "service-worker.js": "http://daggerbrowser.com/home/service-worker.js",
+    "static/css/main.4829b74f.chunk.css.map": "http://daggerbrowser.com/home/static/css/main.4829b74f.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.d46556eb.js",
+    "static/js/runtime-main.5b26263d.js",
     "static/js/2.a24ba32e.chunk.js",
     "static/css/main.4829b74f.chunk.css",
-    "static/js/main.5eb5f9df.chunk.js"
+    "static/js/main.17759984.chunk.js"
   ]
 }

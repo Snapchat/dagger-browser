@@ -39,7 +39,7 @@ dependencies {
 
 4. Use [scripts/mkmanifest.sh](https://github.com/Snapchat/dagger-browser/blob/master/scripts/mkmanifest.sh) to aggregate the component json files into a ComponentsManifest.json.
 
-5. Open a [Dagger Browser instance]((https://snapchat.github.io/dagger-browser/plaid)), and drag-and-drop your ComponentsManifest.json file to load it.
+5. Open a [Dagger Browser instance](https://snapchat.github.io/dagger-browser/home/#/), and drag-and-drop your ComponentsManifest.json file to load it.
 
 6. Alternatively, build a Dagger Browser instance from source. Checkout out the `dagger-browser` project
 ```

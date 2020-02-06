@@ -24,7 +24,7 @@ To get started:
 1. Look up the latest version of the processor plugin in Maven Central:
 <img src="https://img.shields.io/maven-central/v/com.snap.daggerbrowser/daggerbrowser-processor"/>
 
-2. Add a dependency on `com.snap.daggerbrowser:daggerbrowser-processor` to any Gradle modules in project that process Dagger components:
+2. Add a dependency on `com.snap.daggerbrowser:daggerbrowser-processor` to any Gradle modules in your project that process Dagger components:
 ```groovy
 allprojects {
   repositories {

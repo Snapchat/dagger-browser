@@ -17,7 +17,7 @@ You can run `./run.sh` to generate the dagger components manifest for this examp
 
 ## Using Dagger Browser in your app
 
-To build a Dagger Browser site for your project, you'll need to (1) generate json files for your project's Dagger components, and (2) build the Dagger Browser app using that data.
+To build a Dagger Browser site for your project, you'll need to generate json files for your project's Dagger components.
 
 To get started:
 
@@ -36,11 +36,16 @@ dependencies {
 }  
 ```
 3. Build your project. The plugin will generate json files for each Dagger component.
-4. Checkout out the `dagger-browser` project
+
+4. Use [scripts/mkmanifest.sh](https://github.com/Snapchat/dagger-browser/blob/master/scripts/mkmanifest.sh) to aggregate the component json files into a ComponentsManifest.json.
+
+5. Open a [Dagger Browser instance](https://snapchat.github.io/dagger-browser/home/#/), and drag-and-drop your ComponentsManifest.json file to load it.
+
+6. Alternatively, build a Dagger Browser instance from source. Checkout out the `dagger-browser` project
 ```
 $: git clone git@github.com:Snapchat/dagger-browser.git
 ```
-5. Build Dagger Browser using your generated json files:
+7. Build Dagger Browser using your generated json files:
 ```
 cd dagger-browser
 ./run.sh ../my_project/

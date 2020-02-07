@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "http://daggerbrowser.com/plaid/static/css/main.4829b74f.chunk.css",
-    "main.js": "http://daggerbrowser.com/plaid/static/js/main.c04f2fd1.chunk.js",
-    "main.js.map": "http://daggerbrowser.com/plaid/static/js/main.c04f2fd1.chunk.js.map",
-    "runtime-main.js": "http://daggerbrowser.com/plaid/static/js/runtime-main.ca997e93.js",
-    "runtime-main.js.map": "http://daggerbrowser.com/plaid/static/js/runtime-main.ca997e93.js.map",
-    "static/js/2.a24ba32e.chunk.js": "http://daggerbrowser.com/plaid/static/js/2.a24ba32e.chunk.js",
-    "static/js/2.a24ba32e.chunk.js.map": "http://daggerbrowser.com/plaid/static/js/2.a24ba32e.chunk.js.map",
-    "index.html": "http://daggerbrowser.com/plaid/index.html",
-    "precache-manifest.a526c120abf9c0c53343a1720606e227.js": "http://daggerbrowser.com/plaid/precache-manifest.a526c120abf9c0c53343a1720606e227.js",
-    "service-worker.js": "http://daggerbrowser.com/plaid/service-worker.js",
-    "static/css/main.4829b74f.chunk.css.map": "http://daggerbrowser.com/plaid/static/css/main.4829b74f.chunk.css.map"
+    "main.css": "https://daggerbrowser.com/plaid/static/css/main.4829b74f.chunk.css",
+    "main.js": "https://daggerbrowser.com/plaid/static/js/main.2769067f.chunk.js",
+    "main.js.map": "https://daggerbrowser.com/plaid/static/js/main.2769067f.chunk.js.map",
+    "runtime-main.js": "https://daggerbrowser.com/plaid/static/js/runtime-main.92ba8e81.js",
+    "runtime-main.js.map": "https://daggerbrowser.com/plaid/static/js/runtime-main.92ba8e81.js.map",
+    "static/js/2.a24ba32e.chunk.js": "https://daggerbrowser.com/plaid/static/js/2.a24ba32e.chunk.js",
+    "static/js/2.a24ba32e.chunk.js.map": "https://daggerbrowser.com/plaid/static/js/2.a24ba32e.chunk.js.map",
+    "index.html": "https://daggerbrowser.com/plaid/index.html",
+    "precache-manifest.6e36c29e2f67f3e21ed749540107f3de.js": "https://daggerbrowser.com/plaid/precache-manifest.6e36c29e2f67f3e21ed749540107f3de.js",
+    "service-worker.js": "https://daggerbrowser.com/plaid/service-worker.js",
+    "static/css/main.4829b74f.chunk.css.map": "https://daggerbrowser.com/plaid/static/css/main.4829b74f.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.ca997e93.js",
+    "static/js/runtime-main.92ba8e81.js",
     "static/js/2.a24ba32e.chunk.js",
     "static/css/main.4829b74f.chunk.css",
-    "static/js/main.c04f2fd1.chunk.js"
+    "static/js/main.2769067f.chunk.js"
   ]
 }

@@ -1,1 +1,54 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><div class="container">
+<h1>Dagger Browser</h1>
+<p>Dagger Browser is a progressive web app for easily navigating a project's Dagger graph. The graph data is populated from a Dagger <a href="https://dagger.dev/spi.html">SPI</a> plugin, and the browser is built using
+<a href="https://github.com/facebook/create-react-app">CRA (create-react-app)</a> with Typescript.</p>
+<img src="docs/plaid_screenshot.png" width="600" />
+<h2>Trying a sample</h2>
+<p>Check out the <a href="https://snapchat.github.io/dagger-browser/plaid">demo site</a> built from the open source
+<a href="https://github.com/android/plaid">Plaid</a> app.</p>
+<p>The <a href="plugin/sample">plugin/sample</a>
+directory contains a fork of a <a href="https://github.com/google/dagger/tree/master/examples/simple">simple example</a> from the Dagger repo.</p>
+<p>You can run <code>./run.sh</code> to generate the dagger components manifest for this example and display in the Dagger Browser.</p>
+<h2>Using Dagger Browser in your app</h2>
+<p>To build a Dagger Browser site for your project, you'll need to generate json files for your project's Dagger components.</p>
+<p>To get started:</p>
+<ol>
+<li>
+<p>Look up the latest version of the processor plugin in Maven Central:
+<img src="https://img.shields.io/maven-central/v/com.snap.daggerbrowser/daggerbrowser-processor"/></p>
+</li>
+<li>
+<p>Add a dependency on <code>com.snap.daggerbrowser:daggerbrowser-processor</code> to any Gradle modules in your project that process Dagger components:</p>
+</li>
+</ol>
+<pre><code class="language-groovy">allprojects {
+  repositories {
+    mavenCentral()
+  }
+}
+dependencies {
+  kapt &quot;com.snap.daggerbrowser:daggerbrowser-processor:LATEST_VERSION&quot;
+}  
+</code></pre>
+<ol start="3">
+<li>
+<p>Build your project. The plugin will generate json files for each Dagger component.</p>
+</li>
+<li>
+<p>Use <a href="https://github.com/Snapchat/dagger-browser/blob/master/scripts/mkmanifest.sh">scripts/mkmanifest.sh</a> to aggregate the component json files into a ComponentsManifest.json.</p>
+</li>
+<li>
+<p>Open a <a href="https://snapchat.github.io/dagger-browser/home/#/">Dagger Browser instance</a>, and drag-and-drop your ComponentsManifest.json file to load it.</p>
+</li>
+<li>
+<p>Alternatively, build a Dagger Browser instance from source. Checkout out the <code>dagger-browser</code> project</p>
+</li>
+</ol>
+<pre><code>$: git clone git@github.com:Snapchat/dagger-browser.git
+</code></pre>
+<ol start="7">
+<li>Build Dagger Browser using your generated json files:</li>
+</ol>
+<pre><code>cd dagger-browser
+./run.sh ../my_project/
+</code></pre>

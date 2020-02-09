@@ -20,7 +20,7 @@ main() {
     if [ -d "$out_file" ]; then
         out_file="${out_file}/${MANIFEST_FILENAME}"
     elif [ -z ${out_file:-} ]; then
-        out_file=MANIFEST_FILENAME
+        out_file="$MANIFEST_FILENAME"
     fi
 
     echo "Looking for component graph files in $build_dir"

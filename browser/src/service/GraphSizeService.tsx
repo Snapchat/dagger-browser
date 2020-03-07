@@ -66,7 +66,7 @@ class GraphReducerImpl implements GraphReducer {
       'field_count': 0,
       'method_count': 0,
       'lambda_count': 0,
-      'size': 0,
+      'code_size': 0,
       'inner_class_count': 0
     } as ClassInfo;
     this.classSize = new ClassSize(classInfo);

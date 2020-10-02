@@ -10,6 +10,7 @@ MANIFEST_FILENAME=ComponentsManifest.json
 main() {
     local build_dir=${1:-}
     local out_file=${2:-}
+    local pattern=${3:-}
 
     # if component manifest is not provided, then we build the sample
     if [ -z ${build_dir:-} ]; then
@@ -28,7 +29,14 @@ main() {
     local components_manifest_file=$out_file
     mkdir -p build
     local tmp="${components_manifest_file}.tmp"
-    find $build_dir -path '*/build/*_graph.json' >"$tmp"
+
+    if [ -d "$pattern" ]; then
+        pattern="${pattern}"
+    elif [ -z ${pattern:-} ]; then
+        pattern="*/build/*_graph.json"
+    fi
+
+    find $build_dir -path "$pattern" >"$tmp"
     echo '{"components": [' >|"$components_manifest_file"
     for f in $(awk "NR != $(wc -l <$tmp)" $tmp); do
         cat "$f" >>"$components_manifest_file"

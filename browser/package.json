@@ -12,7 +12,7 @@
     "@types/react-dom": "16.9.1",
     "@types/react-router-dom": "^5.1.0",
     "@types/react-select": "^3.0.5",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "query-string": "^6.8.3",
     "react": "^16.10.2",

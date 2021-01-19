@@ -48,6 +48,15 @@ function readableKind(kind: String) {
   return kind
 }
 
+function getProvidingComponents(graphManager: GraphManager, componentName: string, node: Node): string {
+  var components = graphManager.getDependencyProviders(node.key)
+  if (components === undefined) {
+    return ""
+  }
+
+  return " (" + components.map(t => t.substring(1 + t.lastIndexOf('.'))).join() + ")"
+}
+
 function createdComponent(graphManager: GraphManager, componentName: string, node: Node) {
   if (!node.adjacentNodes) {
     return ""
@@ -83,6 +92,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
   const componentSimpleName = componentName.substring(componentName.lastIndexOf('.') + 1)
   const simpleScope = node.scope && node.scope.substring(node.scope.lastIndexOf('.') + 1)
   const createdComponentKey: string = createdComponent(graphManager, componentName ,node);
+  const providingComponents: string = getProvidingComponents(graphManager, componentName ,node);
 
   return (
     <div className="card">
@@ -129,6 +139,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
         <p>
           <span>Type: </span>
           {bindingKind}
+          {providingComponents}
           {createdComponentKey && 
             <span className="unselectable"> | &nbsp;
             <Link

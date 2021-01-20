@@ -61,7 +61,13 @@ function getProvidingComponents(graphManager: GraphManager, componentName: strin
         to={Routes.Component(t)}
       >{t.substring(1 + t.lastIndexOf('.'))}
       </Link>
-      </div>
+      &nbsp;|&nbsp;
+      <Link
+        className="soft-link"
+        to={Routes.GraphNode(t, node.key)}
+      >Implementation
+      </Link>
+    </div>
   )
 }
 

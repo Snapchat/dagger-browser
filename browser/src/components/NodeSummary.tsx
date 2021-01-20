@@ -48,13 +48,21 @@ function readableKind(kind: String) {
   return kind
 }
 
-function getProvidingComponents(graphManager: GraphManager, componentName: string, node: Node): string {
+function getProvidingComponents(graphManager: GraphManager, componentName: string, node: Node) {
   var components = graphManager.getDependencyProviders(node.key)
   if (components === undefined) {
-    return ""
+    return undefined
   }
 
-  return " (" + components.map(t => t.substring(1 + t.lastIndexOf('.'))).join() + ")"
+  return components.map(t => 
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <Link
+        className="soft-link"
+        to={Routes.Component(t)}
+      >{t.substring(1 + t.lastIndexOf('.'))}
+      </Link>
+      </div>
+  )
 }
 
 function createdComponent(graphManager: GraphManager, componentName: string, node: Node) {
@@ -92,7 +100,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
   const componentSimpleName = componentName.substring(componentName.lastIndexOf('.') + 1)
   const simpleScope = node.scope && node.scope.substring(node.scope.lastIndexOf('.') + 1)
   const createdComponentKey: string = createdComponent(graphManager, componentName ,node);
-  const providingComponents: string = getProvidingComponents(graphManager, componentName ,node);
+  const providingComponents = getProvidingComponents(graphManager, componentName ,node);
 
   return (
     <div className="card">
@@ -139,7 +147,6 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
         <p>
           <span>Type: </span>
           {bindingKind}
-          {providingComponents}
           {createdComponentKey && 
             <span className="unselectable"> | &nbsp;
             <Link
@@ -179,6 +186,14 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
             )}
           </p>
         )}
+
+        {node.kind == "COMPONENT_PROVISION" && (
+          <p>
+          <span className="unselectable">Available from: </span>
+          {providingComponents}
+        </p>
+        )}
+
         <br />
         <h6>Dependencies
           &nbsp;|&nbsp;

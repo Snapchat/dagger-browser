@@ -24,6 +24,7 @@ export default class GraphManager {
   // Caches to speed up graph-based operations
   private nodeMap: { [componentName: string]: { [key: string]: Node } } = {};
   private componentMap: { [componentName: string]: Component } = {};
+  private provisionsToExposingComponentsMap: { [key: string]: Array<string> } = {};
   private subcomponentWeights: { [key: string]: Weight }  = {};
   private callsitesMap: {
     [componentName: string]: { [key: string]: Node[] };
@@ -158,6 +159,13 @@ export default class GraphManager {
     });
   }
 
+  /**
+   * Returns components that can provide a given dependency
+   */
+  getDependencyProviders(key: string): string[] {
+    return this.provisionsToExposingComponentsMap[key]
+  }
+
   getSubcomponentWeight(subcomponent: string): Weight {
     return this.subcomponentWeights[subcomponent];
   }
@@ -233,6 +241,19 @@ export default class GraphManager {
       component.nodes = component.nodes.filter(node => !this.shouldSkipNode(node));
 
       for (const node of component.nodes) {
+
+        if (node.key == component.name) {
+          // The component itself is a node with its own usable dependencies
+          for (const dependency of node.dependencies) {
+            var arr = this.provisionsToExposingComponentsMap[dependency.key]
+            if (!arr) {
+              arr = Array<string>()
+              this.provisionsToExposingComponentsMap[dependency.key] = arr
+            }
+            arr.push(component.name)
+          }
+        }
+
         this.nodeMap[component.name][node.key] = node;
         this.nodeMap[ALL_COMPONENTS][node.key] = node;
 

@@ -28,6 +28,8 @@ const ComponentSummary = ({ graphManager, weightService, componentName, onSelect
         binding.kind === "MEMBERS_INJECTION"
     );
 
+  const componentProvisions = graph.nodes[0].dependencies
+
   const multiBindings = graph.nodes.filter(
     binding =>
       binding.kind === "MULTIBOUND_SET" || binding.kind === "MULTIBOUND_MAP"
@@ -54,6 +56,19 @@ const ComponentSummary = ({ graphManager, weightService, componentName, onSelect
             weight={weightService.getWeight(componentName)}
           />
         </div>
+
+        {componentProvisions.length > 0 && 
+          <div>Component Provisions:
+          {componentProvisions.map(binding =>
+            <NodeLink
+              key={binding.key}
+              scoped={true}
+              node={binding}
+              onSelect={node => onSelect(componentName, node)}
+            />
+          )}
+          </div>
+        }
 
         {membersInjectors.length > 0 &&
           <div>

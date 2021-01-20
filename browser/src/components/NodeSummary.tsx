@@ -189,7 +189,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
 
         {node.kind == "COMPONENT_PROVISION" && (
           <p>
-          <span className="unselectable">Available from: </span>
+          <span className="unselectable">Provided by: </span>
           {providingComponents}
         </p>
         )}

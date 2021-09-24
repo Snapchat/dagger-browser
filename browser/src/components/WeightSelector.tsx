@@ -25,7 +25,7 @@ export default class WeightSelector extends React.Component<Props> {
       <Select
           className="component-select weight-select"
           classNamePrefix="react-select"
-          value={this.state}
+          value={this.metricOptions[0]}
           onChange={selectedOption => {
               const option = selectedOption as { value: string };
               this.setState(option);

@@ -30,7 +30,7 @@ export const GraphSelector = ({
   });
 
   let defaultValue = componentName
-    ? ({ value: componentName, label: displayName(componentName) } as ValueType<OptionTypeBase>)
+    ? ({ value: componentName, label: displayName(componentName) } as ValueType<OptionTypeBase, false>)
     : graphOptions[0];
 
   return (
@@ -38,7 +38,7 @@ export const GraphSelector = ({
       value={defaultValue}
       className="component-select"
       classNamePrefix="react-select"
-      onChange={value => selectGraph((value as { value: string }).value)}
+      onChange={value => selectGraph((value as unknown as { value: string }).value)}
       placeholder="Select graph..."
       options={graphOptions}
     />

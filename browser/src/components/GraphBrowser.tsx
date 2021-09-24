@@ -70,7 +70,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
               <ModuleSummary
                 graphManager={graphManager}
                 weightService={weightService}
-                moduleName={decodeURIComponent(props.match.params.module)}
+                moduleName={decodeURIComponent(props.match.params.module as string)}
                 componentName={componentName}
               />
             )}
@@ -81,7 +81,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
               <ModuleSummary
                 graphManager={graphManager}
                 weightService={weightService}
-                moduleName={decodeURIComponent(props.match.params.module)}
+                moduleName={decodeURIComponent(props.match.params.module as string)}
                 componentName={componentName}
               />
             )}
@@ -92,7 +92,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
               <ScopeSummary
                 graphManager={graphManager}
                 weightService={weightService}
-                scope={decodeURIComponent(props.match.params.scope)}
+                scope={decodeURIComponent(props.match.params.scope as string)}
                 componentName={componentName}
               />
             )}
@@ -102,7 +102,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
             render={props => (
               <NodeClosure
                 graphManager={graphManager}
-                nodeName={decodeURIComponent(props.match.params.key)}
+                nodeName={decodeURIComponent(props.match.params.key as string)}
                 componentName={componentName}
               />
             )}
@@ -113,7 +113,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
               <NodeSummary
                 graphManager={graphManager}
                 weightService={weightService}
-                nodeName={decodeURIComponent(props.match.params.node)}
+                nodeName={decodeURIComponent(props.match.params.node as string)}
                 componentName={componentName}
               />
             )}
@@ -123,7 +123,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
             render={props => (
               <SubcomponentSummary
                 graphManager={graphManager}
-                subcomponentName={decodeURIComponent(props.match.params.subcomponent)}
+                subcomponentName={decodeURIComponent(props.match.params.subcomponent as string)}
                 componentName={componentName}
                 weightService={weightService}
               />
@@ -133,7 +133,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
             path={Paths.Component}
             render={props => (
               <ComponentSummary
-                componentName={decodeURIComponent(props.match.params.component)}
+                componentName={decodeURIComponent(props.match.params.component as string)}
                 graphManager={graphManager}
                 weightService={weightService}
                 onSelect={(componentName, node) =>

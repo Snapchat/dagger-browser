@@ -67,5 +67,3 @@ export class NodeAutosuggestService {
     }
 }
 export default NodeAutosuggestService
-
-// DesignerNewsApiOkHttpClient

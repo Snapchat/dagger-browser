@@ -1,9 +1,11 @@
-export class Helper {
+export class DisplayNameHelper {
     //constructor is empty, only necessary to access methods parseString, and addQuestionsMarks
     constructor() {}
 
     /* 
-    Component is passed in and a shorter name of the component is returned, 
+    Component is passed in and a shorter name of the component is returned
+    The component is broken into tokens and then processed and returns the processed
+    token to then be appended into the result
     */
     displayNameForKey(component: string){
         var token: string = ""
@@ -18,10 +20,12 @@ export class Helper {
                 }
                 shorter_component += this.returnProcessedToken(token) + " "
                 token = ""
+                // will skip adding the whitespace to the next token
                 continue
             }
             token += component.charAt(i)
         }
+        // used to append the last token or only token in the loop
         shorter_component += this.returnProcessedToken(token)
         return shorter_component
     }
@@ -69,4 +73,4 @@ export class Helper {
         return processed_token
     }
 }
-export default Helper
+export default DisplayNameHelper

@@ -1,8 +1,10 @@
-import React from "react";
+import React , { useState } from "react";
 import { Node, Weight } from "../models/Graph";
 import CodeLink from "./CodeLink";
 import NodeIcon from "./NodeIcon";
 import NodeWeight from "./NodeWeight";
+import DisplayNameHelper from "../util/DisplayNameHelper";
+import "./NodeToolTip.css";
 
 type Props = {
   node: Node;
@@ -28,15 +30,20 @@ const NodeLink: React.FC<Props> = ({
   kind
 }: Props) => {
   const scope = node.scope ? `[${node.scope.split(".").pop()}]` : "";
+  const displayNameHelper = new DisplayNameHelper()
+
   return (<div>
     <div
       className="binding"
       onClick={() => onSelect && onSelect(node.key)}
     >
-      <div className="text">
+      <div className="tooltip_link">
         <NodeIcon kind={kind || node.kind} />
         {scoped && <span className="light-text">{scope}&nbsp;</span>}
-        {getDisplayName(node.key)}&nbsp;
+        {displayNameHelper.displayNameForKey(getDisplayName(node.key))}&nbsp;
+        <div className="tooltiptext_link">
+              <span className="tooltiptext_link">{node.key}</span>
+        </div>
       </div>
       <div>
         <CodeLink link={node.key} />

@@ -1,0 +1,39 @@
+.tooltip_suggest {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltip_suggest .tooltiptext_suggest {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position:fixed;
+    z-index: 1;
+}
+  
+.tooltip_suggest:hover .tooltiptext_suggest {
+    visibility: visible;
+}
+
+.tooltip_link {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltip_link .tooltiptext_link {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 3px;
+    padding: 2px 0;
+    position:fixed;
+    z-index: 1;
+}
+  
+.tooltip_link:hover .tooltiptext_link {
+    visibility: visible;
+}

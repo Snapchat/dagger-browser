@@ -5,6 +5,7 @@ import NodeWeight from "./NodeWeight";
 import WeightService from "../service/WeightService";
 import DisplayNameHelper from "../util/DisplayNameHelper";
 import "./NodeToolTip.css";
+
 const MAX_SUGGESTIONS = 40;
 
 interface Props {
@@ -31,6 +32,7 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
   const [query, setQuery] = useState("");
   const searchRef = useRef<Autosuggest<GraphMatchResult>>(null);
   const displayNameHelper = new DisplayNameHelper()
+  
   const suggestions = useMemo(
     () => getSuggestions(graphManager, componentName || "", query),
     [graphManager, componentName, query]

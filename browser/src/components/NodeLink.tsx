@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React from "react";
 import { Node, Weight } from "../models/Graph";
 import CodeLink from "./CodeLink";
 import NodeIcon from "./NodeIcon";
@@ -31,7 +31,6 @@ const NodeLink: React.FC<Props> = ({
 }: Props) => {
   const scope = node.scope ? `[${node.scope.split(".").pop()}]` : "";
   const displayNameHelper = new DisplayNameHelper()
-
   return (<div>
     <div
       className="binding"

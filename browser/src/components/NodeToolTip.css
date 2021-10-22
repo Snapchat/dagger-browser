@@ -7,6 +7,7 @@
     visibility: hidden;
     background-color: white;
     color: black;
+    padding: 2px 2px;
     text-align: center;
     border-radius: 1px;
     border-style: solid;
@@ -32,6 +33,7 @@
     visibility: hidden;
     background-color: white;
     color: black;
+    padding: 2px 2px;
     text-align: center;
     border-radius: 1px;
     border-style: solid;

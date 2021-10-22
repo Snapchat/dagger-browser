@@ -39,10 +39,8 @@ const NodeLink: React.FC<Props> = ({
       <div className="tooltip_link">
         <NodeIcon kind={kind || node.kind} />
         {scoped && <span className="light-text">{scope}&nbsp;</span>}
-        {displayNameHelper.displayNameForKey(getDisplayName(node.key))}&nbsp;
-        <div className="tooltiptext_link">
+        {displayNameHelper.displayNameForKey(getDisplayName(node.key))}
               <span className="tooltiptext_link">{node.key}</span>
-        </div>
       </div>
       <div>
         <CodeLink link={node.key} />

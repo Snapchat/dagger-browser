@@ -72,7 +72,7 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
                 ? "[" + suggestion.componentName.split(".").pop() + "] "
                 : ""}
             </span>
-            {displayNameHelper.displayNameForKey(suggestion.node.key)} &nbsp;
+            {displayNameHelper.displayNameForKey(suggestion.node.key)} 
               <span className="tooltiptext_suggest">{suggestion.node.key}</span>
             <NodeWeight
               weight={weightService.getWeight(

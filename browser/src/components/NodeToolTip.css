@@ -7,16 +7,26 @@
     visibility: hidden;
     background-color: white;
     color: black;
-    padding: 2px 2px;
     text-align: center;
-    border-radius: 1px;
-    border-style: solid;
-    border-width: thin;
-    margin-left: 50px;
-    position:fixed;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
     z-index: 1;
+    top: -5px;
+    left: 100%;
     opacity: 0;
 }
+
+.tooltip_suggest .tooltiptext_suggest::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+  }
   
 .tooltip_suggest:hover .tooltiptext_suggest {
     opacity: 1;
@@ -33,16 +43,28 @@
     visibility: hidden;
     background-color: white;
     color: black;
-    padding: 2px 2px;
     text-align: center;
-    border-radius: 1px;
+    border-radius: 6px;
+    padding: 5px 10px;
     border-style: solid;
     border-width: thin;
     margin-left: 40px;
-    position:fixed;
+    position:absolute;
+    top: -5px;
     z-index: 1;
     opacity: 0;
 }
+
+.tooltip_link .tooltiptext_link::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+  }
   
 .tooltip_link:hover .tooltiptext_link {
     opacity: 1;

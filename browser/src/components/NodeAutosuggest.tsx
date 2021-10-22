@@ -28,7 +28,7 @@ function getSuggestions(
   );
 }
 
-const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName }: Props) => {
+const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName }: Props) => { 
   const [query, setQuery] = useState("");
   const searchRef = useRef<Autosuggest<GraphMatchResult>>(null);
   const displayNameHelper = new DisplayNameHelper()
@@ -73,9 +73,7 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
                 : ""}
             </span>
             {displayNameHelper.displayNameForKey(suggestion.node.key)} &nbsp;
-            <div className="tooltiptext_suggest">
               <span className="tooltiptext_suggest">{suggestion.node.key}</span>
-            </div>
             <NodeWeight
               weight={weightService.getWeight(
                 suggestion.componentName,

@@ -8,13 +8,18 @@
     background-color: white;
     color: black;
     text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
+    border-radius: 1px;
+    border-style: solid;
+    border-width: thin;
+    margin-left: 50px;
     position:fixed;
     z-index: 1;
+    opacity: 0;
 }
   
 .tooltip_suggest:hover .tooltiptext_suggest {
+    opacity: 1;
+    transition: opacity  0s linear 500ms;
     visibility: visible;
 }
 
@@ -28,12 +33,17 @@
     background-color: white;
     color: black;
     text-align: center;
-    border-radius: 3px;
-    padding: 2px 0;
+    border-radius: 1px;
+    border-style: solid;
+    border-width: thin;
+    margin-left: 40px;
     position:fixed;
     z-index: 1;
+    opacity: 0;
 }
   
 .tooltip_link:hover .tooltiptext_link {
+    opacity: 1;
+    transition: opacity  0s linear 500ms;
     visibility: visible;
 }

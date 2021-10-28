@@ -9,6 +9,7 @@ import WeightServiceManager from "./service/WeightServiceManager";
 import { BrowserHeader } from "./components/BrowserHeader";
 import FileDropzone from "./components/FileDropzone";
 import Config from "./models/Config";
+import axios from 'axios'
 
 interface AppState {
   manifestUrl?: string;
@@ -100,6 +101,10 @@ class App extends React.Component<any, AppState> {
                 </div>
             </FileDropzone>
           )}
+        />
+        <Route path ={"/fetchNode:nodeName"} render = { () => (
+          <h2>FetchNode Route</h2>
+        )}
         />
       </QueryParamProvider>
     </HashRouter>;

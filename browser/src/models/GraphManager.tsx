@@ -106,10 +106,6 @@ export default class GraphManager {
   getComponent(componentName: string): Component {
     const component = this.componentMap[componentName];
 
-    if (!component) {
-      throw Error(`Could not find ${componentName} component`);
-    }
-
     return component;
   }
 

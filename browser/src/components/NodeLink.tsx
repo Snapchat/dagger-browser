@@ -24,7 +24,7 @@ function getDisplayName(key: string): string {
 
 const NodeLink: React.FC<Props> = ({
   node,
-  onSelect,
+onSelect,
   weight = undefined,
   scoped = false,
   kind

@@ -14,6 +14,12 @@ export type Props = {
   nodeName: string;
 };
 
+export type SearchProps = {
+  graphManager: GraphManager;
+  weightService: WeightService;
+  nodeName: string;
+};
+
 function readableKind(kind: String) {
   // https://github.com/google/dagger/blob/master/java/dagger/model/BindingKind.java
   switch(kind) {
@@ -85,6 +91,14 @@ function createdComponent(graphManager: GraphManager, componentName: string, nod
     }
   }
   return ""
+}
+
+export function NodeSearch({ graphManager, weightService, nodeName }: SearchProps) {
+  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 1, false)[0];
+  var componentName = searchResult.componentName
+  var nodeName: string = searchResult.node.key
+  var prop: Props = {graphManager, weightService, componentName, nodeName}
+  return NodeSummary(prop)
 }
 
 export function NodeSummary({ graphManager, weightService, componentName, nodeName }: Props) {

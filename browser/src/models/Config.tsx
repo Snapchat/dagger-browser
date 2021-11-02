@@ -2,7 +2,7 @@
  * Configuration class based on input Config.json
  */
 
- import data from "src/Config.json";
+import data from "src/Config.json";
 
 interface Config {
   // Title of the page

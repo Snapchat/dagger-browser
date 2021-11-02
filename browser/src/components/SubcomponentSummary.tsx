@@ -37,7 +37,7 @@ const SubcomponentSummary = ({ graphManager, subcomponentName, componentName, we
                 kind={binding.kind}
                 scoped={true}
                 node={binding}
-                onSelect={node => history.push(Routes.GraphNode(componentName, binding.key))}
+                onSelect={node => history.push(Routes.GraphNode(componentName == "search" ? graphManager.getMatches("", subcomponentName, 1, false)[0].componentName : componentName, binding.key))}
               />
             );
           })}

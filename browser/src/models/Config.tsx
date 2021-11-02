@@ -2,6 +2,7 @@
  * Configuration class based on input Config.json
  */
 
+ import data from "src/Config.json";
 
 interface Config {
   // Title of the page
@@ -15,8 +16,8 @@ interface Config {
 }
 
 export default {
-  TITLE: "Dagger Browser" || "Graph Browser",
-  REPO_URL: "" || "",
+  TITLE: data.title || "Graph Browser",
+  REPO_URL: data.repo_url || "",
   PUBLIC_URL: process.env.PUBLIC_URL || "",
   COMPONENTS_MANIFEST_JSON_URL: (process.env.PUBLIC_URL || "") + '/ComponentsManifest.json'
 } as Config;

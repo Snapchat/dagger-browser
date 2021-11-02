@@ -102,10 +102,7 @@ class App extends React.Component<any, AppState> {
             </FileDropzone>
           )}
         />
-        <Route path ={"/fetchNode:nodeName"} render = { () => (
-          <h2>FetchNode Route</h2>
-        )}
-        />
+        
       </QueryParamProvider>
     </HashRouter>;
   }

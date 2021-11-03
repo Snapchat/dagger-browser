@@ -110,10 +110,6 @@ export default class GraphManager {
   }
 
   getNode(component: string | undefined, node: string): Node | undefined {
-    if (component == "search") {
-      let results = this.getMatches("", node.trim().toLowerCase(),1, false)
-      return this.nodeMap[results[0].componentName][node]
-    }
     return this.nodeMap[component ? component : ALL_COMPONENTS][node];
   }
 
@@ -140,8 +136,8 @@ export default class GraphManager {
   }
 
   getCallsites(componentName: string, node: string): Node[] {
-    return (this.callsitesMap[componentName == "search" ? this.getMatches("", node, 1, false)[0].componentName : componentName][node] || []).map((binding: Node) => {
-      const reference = this.getNode(componentName == "search" ? this.getMatches("", node, 1, false)[0].componentName : componentName, binding.key);
+    return (this.callsitesMap[componentName][node] || []).map((binding: Node) => {
+      const reference = this.getNode(componentName, binding.key);
       if (!reference) {
         return binding;
       }
@@ -171,14 +167,6 @@ export default class GraphManager {
   }
 
   getSubcomponentBindings(component: string, subcomponent: string): Node[] {
-    if (component == "search") {
-      let nodeList: Node[] = []
-      this.getMatches("", subcomponent.trim().toLowerCase(),1, false).forEach(result => {
-        nodeList.push(result.node)
-      })
-      return nodeList
-    }
-
     return Object.values(this.nodeMap[component]).filter((node: Node) => {
       return node.component === subcomponent
     });

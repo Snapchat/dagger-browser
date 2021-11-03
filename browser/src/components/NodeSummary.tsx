@@ -14,6 +14,12 @@ export type Props = {
   nodeName: string;
 };
 
+export type SearchProps = {
+  graphManager: GraphManager;
+  weightService: WeightService;
+  nodeName: string;
+};
+
 function readableKind(kind: String) {
   // https://github.com/google/dagger/blob/master/java/dagger/model/BindingKind.java
   switch(kind) {
@@ -85,6 +91,24 @@ function createdComponent(graphManager: GraphManager, componentName: string, nod
     }
   }
   return ""
+}
+
+export function NodeSearch({ graphManager, weightService, nodeName }: SearchProps) {
+  //search for the top five choices the nodeName could be in the Dagger-Graph based on the nodeName
+  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 5, false);
+  // return if nodeName is not found in the graph
+  if (searchResult === undefined) {
+    return (
+      <div>
+        Results for node name <strong><i>{nodeName}</i></strong> are not found in graph.
+      </div>
+    )
+  }
+  //TODO: add a component that handles multiple search results like "MemoryModule" 
+  var componentName = searchResult[0].componentName
+  var nodeName: string = searchResult[0].node.key
+  var prop: Props = {graphManager, weightService, componentName, nodeName}
+  return NodeSummary(prop)
 }
 
 export function NodeSummary({ graphManager, weightService, componentName, nodeName }: Props) {

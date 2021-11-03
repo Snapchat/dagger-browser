@@ -6,7 +6,7 @@ import NodeAutosuggest from "./NodeAutosuggest";
 import { BrowserHeader } from "./BrowserHeader";
 import Home from "src/components/Home";
 import { ModuleSummary } from "src/components/ModuleSummary";
-import { NodeSummary } from "src/components/NodeSummary";
+import { NodeSearch, NodeSummary } from "src/components/NodeSummary";
 import { ScopeSummary } from "./ScopeSummary";
 import NodeClosure from "src/components/NodeClosure";
 import SubcomponentSummary from "src/components/SubcomponentSummary";
@@ -104,6 +104,16 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
                 graphManager={graphManager}
                 nodeName={decodeURIComponent(props.match.params.key as string)}
                 componentName={componentName}
+              />
+            )}
+          ></Route>
+          <Route
+            path={Paths.SearchNode}
+            render={props => (
+              <NodeSearch
+                graphManager={graphManager}
+                weightService={weightService}
+                nodeName={decodeURIComponent(props.match.params.nodeName as string)}
               />
             )}
           ></Route>

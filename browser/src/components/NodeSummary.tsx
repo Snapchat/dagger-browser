@@ -97,7 +97,7 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
   //search for the top five choices the nodeName could be in the Dagger-Graph based on the nodeName
   var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 5, false);
   // return if nodeName is not found in the graph
-  if (searchResult === undefined) {
+  if (searchResult.length == 0) {
     return (
       <div>
         Results for node name <strong><i>{nodeName}</i></strong> are not found in graph.

@@ -14,7 +14,6 @@ export type Props = {
 };
 
 export function ModuleSummary({ componentName, moduleName, graphManager, weightService }: Props) {
-    // Get auto suggestion result from graphManager
   const graphModule = graphManager.getModule(componentName, moduleName);
   const history = useHistory();
 

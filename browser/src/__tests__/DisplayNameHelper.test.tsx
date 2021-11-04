@@ -35,4 +35,14 @@ describe("Various classes in the Dagger Graph, will return the correct shorter n
            "Map<Class<? DurableJob<?>>, Provider<DurableJobProcessor<?,?>>> LensesDurableJobComponentMultibindingsModule"
           )
       })
+    
+    test('displayNameHelperShouldReturn_SpectaclesModules.SpectaclesExportApiModule', () => {
+      expect(displayNameHelper.displayNameForKey("com.snap.spectacles.bindings.SpectaclesModules.SpectaclesExportApiModule")
+      ).equals("SpectaclesModules.SpectaclesExportApiModule")
+    })
+
+    test('displayNameHelperShouldReturn_LegacyMainActivitySubcomponent', () => {
+      expect(displayNameHelper.displayNameForKey("com.snap.mushroom.dagger.LegacyMainActivitySubcomponent")
+      ).equals("LegacyMainActivitySubcomponent")
+    })
   });

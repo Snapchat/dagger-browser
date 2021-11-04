@@ -15,34 +15,34 @@ describe("Various classes in the Dagger Graph, will return the correct shorter n
         "CoffeeApp.CoffeeShop")
     })
 
-    test('displayNameHelperShouldReturn_@DesignerNewsApi OkHttpClient', () => {
-      expect(displayNameHelper.displayNameForKey("@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkHttpClient")).equals(
-        "@DesignerNewsApi OkHttpClient")
+    test('displayNameHelperShouldReturn_@DesignerNewsApi OkClient', () => {
+      expect(displayNameHelper.displayNameForKey("@io.plaidapp.core.dagger.DesignerNewsApi okhttp3.OkClient")).equals(
+        "@DesignerNewsApi OkClient")
     })
 
-    test('displayNameHelperShouldReturn_LoginLocalDataSource', () => {
-      expect(displayNameHelper.displayNameForKey("io.plaidapp.core.designernews.data.login.LoginLocalDataSource")).equals(
-        "LoginLocalDataSource"
+    test('displayNameHelperShouldReturn_Login', () => {
+      expect(displayNameHelper.displayNameForKey("com.snap.dagger.sample.data.login.Login")).equals(
+        "Login"
         )
     })
 
     test('displayNameHelperShouldReturn_Map<Class<? DurableJob<?>>, Provider<DurableJobProcessor<?,?>>>' + 
-    ' LensesDurableJobComponentMultibindingsModule', () => {
+    ' AuthorDetailsModule', () => {
       expect(displayNameHelper.displayNameForKey(
-        "java.util.Map<java.lang.Class<? extends com.snap.durablejob.DurableJob<?>>,javax.inject.Provider<"+
-        "com.snap.durablejob.DurableJobProcessor<?,?>>> com.snap.lenses.app.LensesDurableJobComponent_MultibindingsModule"+
-        "#provide_socialUnlockResponseCacheCleanupProcessorMultibinding")).equals(
-           "Map<Class<? DurableJob<?>>, Provider<DurableJobProcessor<?,?>>> LensesDurableJobComponentMultibindingsModule"
+        "java.util.Map<java.lang.Class<? extends com.snap.dagger.DurableJob<?>>,javax.inject.Provider<"+
+        "com.snap.dagger.DurableJobProcessor<?,?>>> com.snap.dagger.browser.AuthorDetailsModule"+
+        "#Multibinding")).equals(
+           "Map<Class<? DurableJob<?>>, Provider<DurableJobProcessor<?,?>>> AuthorDetailsModule"
           )
       })
     
-    test('displayNameHelperShouldReturn_SpectaclesModules.SpectaclesExportApiModule', () => {
-      expect(displayNameHelper.displayNameForKey("com.snap.spectacles.bindings.SpectaclesModules.SpectaclesExportApiModule")
-      ).equals("SpectaclesModules.SpectaclesExportApiModule")
+    test('displayNameHelperShouldReturn_CoffeeMachine.CoffeeMachine', () => {
+      expect(displayNameHelper.displayNameForKey("com.snap.dagger.browser.sample.CoffeeMachine.CoffeeMachine")
+      ).equals("CoffeeMachine.CoffeeMachine")
     })
 
-    test('displayNameHelperShouldReturn_LegacyMainActivitySubcomponent', () => {
-      expect(displayNameHelper.displayNameForKey("com.snap.mushroom.dagger.LegacyMainActivitySubcomponent")
-      ).equals("LegacyMainActivitySubcomponent")
+    test('displayNameHelperShouldReturn_CoffeeBeans', () => {
+      expect(displayNameHelper.displayNameForKey("com.snap.dagger.browser.sample.CoffeeBeans")
+      ).equals("CoffeeBeans")
     })
   });

@@ -110,6 +110,16 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
      the number of bindings they each have
   */
   if (searchResult.length > 1) {
+    //If nodeName equals to the shortName of a node key, return that node
+    const displayNameHelper = new DisplayNameHelper()
+    {searchResult.map(element => {
+        if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
+          var componentName = element.componentName
+          var subComponentName: string = element.node.key
+          var prop: Props = { graphManager, weightService, componentName, nodeName: subComponentName }
+          return NodeSummary(prop)
+        }
+    })}
     return (
       <div>
         {searchResult.map(element => {

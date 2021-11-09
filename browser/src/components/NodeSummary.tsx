@@ -6,6 +6,8 @@ import Routes from "src/Routes";
 import { GraphSelector } from "./GraphSelector";
 import WeightService from "../service/WeightService";
 import { Node } from "src/models/Graph";
+import SubcomponentSummary from "./SubcomponentSummary";
+import DisplayNameHelper from "src/util/DisplayNameHelper";
 
 export type Props = {
   graphManager: GraphManager;
@@ -94,8 +96,8 @@ function createdComponent(graphManager: GraphManager, componentName: string, nod
 }
 
 export function NodeSearch({ graphManager, weightService, nodeName }: SearchProps) {
-  //search for the top five choices the nodeName could be in the Dagger-Graph based on the nodeName
-  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 1, false);
+  //search for the top five choices the nodeName could be in the Graph based on the nodeName
+  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 5, false);
   // return if nodeName is not found in the graph
   if (searchResult.length == 0) {
     return (
@@ -104,7 +106,36 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
       </div>
     )
   }
-  //TODO: add a component that handles multiple search results like "MemoryModule" 
+  /* If there are more than 1 possible Subcomponent, then the different parents will be displayed based
+     the number of bindings they each have
+  */
+  if (searchResult.length > 1) {
+    //If nodeName equals to the shortName of a node key, return that node
+    const displayNameHelper = new DisplayNameHelper()
+    {searchResult.map(element => {
+        if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
+          var componentName = element.componentName
+          var subComponentName: string = element.node.key
+          var prop: Props = { graphManager, weightService, componentName, nodeName: subComponentName }
+          return NodeSummary(prop)
+        }
+    })}
+    return (
+      <div>
+        {searchResult.map(element => {
+          let total = graphManager.getSubcomponentBindings(element.componentName, element.node.key)
+          if(total.length != 0){
+            return<SubcomponentSummary 
+              graphManager={graphManager} 
+              weightService={weightService} 
+              componentName={element.componentName} 
+              subcomponentName={element.node.key} 
+              />
+          }
+        })}
+      </div>
+    )
+  }
   var componentName = searchResult[0].componentName
   var nodeName: string = searchResult[0].node.key
   var prop: Props = {graphManager, weightService, componentName, nodeName}
@@ -113,6 +144,7 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
 
 export function NodeSummary({ graphManager, weightService, componentName, nodeName }: Props) {
   const history = useHistory();
+  const displayNameHelper = new DisplayNameHelper()
   const node = graphManager.getNode(componentName, nodeName);
 
   if (!node) {
@@ -169,7 +201,10 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
                 className="soft-link"
                 to={Routes.SubComponent(componentName, node.component)}
               >
-                {node.component}
+              <div className="tooltip_link">
+              {displayNameHelper.displayNameForKey(node.component)}
+                <span className="tooltiptext_link">{node.component}</span>
+              </div>
           </Link>
         </p>
         )}
@@ -209,7 +244,10 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
                 className="soft-link"
                 to={Routes.GraphModule(componentName, node.module)}
               >
-                {bindingModule}
+                <div className="tooltip_link">
+                  {displayNameHelper.displayNameForKey(bindingModule)}
+                  <span className="tooltiptext_link">{bindingModule}</span>
+              </div>
               </Link>
             ) : (
               <span>n/a</span>

@@ -97,7 +97,7 @@ function createdComponent(graphManager: GraphManager, componentName: string, nod
 
 export function NodeSearch({ graphManager, weightService, nodeName }: SearchProps) {
   //search for the top five choices the nodeName could be in the Graph based on the nodeName
-  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 5, false);
+  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 1, false);
   // return if nodeName is not found in the graph
   if (searchResult.length == 0) {
     return (

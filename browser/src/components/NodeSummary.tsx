@@ -14,6 +14,7 @@ export type Props = {
   weightService: WeightService;
   componentName: string;
   nodeName: string;
+  fullDetails: boolean;
 };
 
 export type SearchProps = {
@@ -97,7 +98,8 @@ function createdComponent(graphManager: GraphManager, componentName: string, nod
 
 export function NodeSearch({ graphManager, weightService, nodeName }: SearchProps) {
   //search for the top five choices the nodeName could be in the Graph based on the nodeName
-  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 1, false);
+  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 5, false);
+  const displayNameHelper = new DisplayNameHelper()
   // return if nodeName is not found in the graph
   if (searchResult.length == 0) {
     return (
@@ -106,43 +108,29 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
       </div>
     )
   }
-  /* If there are more than 1 possible Subcomponent, then the different parents will be displayed based
-     the number of bindings they each have
-  */
+  // will partially display each nodes summary
   if (searchResult.length > 1) {
-    //If nodeName equals to the shortName of a node key, return that node
-    const displayNameHelper = new DisplayNameHelper()
     {searchResult.map(element => {
-        if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
-          var componentName = element.componentName
-          var subComponentName: string = element.node.key
-          var prop: Props = { graphManager, weightService, componentName, nodeName: subComponentName }
-          return NodeSummary(prop)
-        }
+      if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
+        //TODO: If nodeName is CoffeeMaker && results list contains CoffeeMakerController & CoffeeMaker return CoffeeMaker
+      }
     })}
     return (
       <div>
         {searchResult.map(element => {
-          let total = graphManager.getSubcomponentBindings(element.componentName, element.node.key)
-          if(total.length != 0){
-            return<SubcomponentSummary 
-              graphManager={graphManager} 
-              weightService={weightService} 
-              componentName={element.componentName} 
-              subcomponentName={element.node.key} 
-              />
-          }
+          var prop : Props = {graphManager, weightService, componentName : element.componentName, nodeName : element.node.key, fullDetails: false}
+          return NodeSummary(prop)
         })}
       </div>
     )
   }
   var componentName = searchResult[0].componentName
   var nodeName: string = searchResult[0].node.key
-  var prop: Props = {graphManager, weightService, componentName, nodeName}
+  var prop: Props = {graphManager, weightService, componentName, nodeName, fullDetails : true}
   return NodeSummary(prop)
 }
 
-export function NodeSummary({ graphManager, weightService, componentName, nodeName }: Props) {
+export function NodeSummary({ graphManager, weightService, componentName, nodeName, fullDetails }: Props) {
   const history = useHistory();
   const displayNameHelper = new DisplayNameHelper()
   const node = graphManager.getNode(componentName, nodeName);
@@ -171,7 +159,10 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
           <NodeLink
               node={node}
               weight={weightService.getWeight(componentName, node.key)}
-          />
+              onSelect={() => 
+                {!fullDetails && history.push(Routes.GraphNode(componentName, node.key))}
+              }
+              />
         </div>
 
         <p>
@@ -263,7 +254,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
         )}
 
         <br />
-        <h6>Dependencies
+       {fullDetails && <h6>Dependencies
           &nbsp;|&nbsp;
           <Link
             className="soft-link"
@@ -271,8 +262,8 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
           >
           transitive
           </Link>
-        </h6>
-        {node &&
+        </h6>}
+        {fullDetails && node &&
           node.dependencies
             .map(d => ({
               node: graphManager.getNode(componentName, d.key),
@@ -293,10 +284,10 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
                 />
               );
             })}
-        {!node || (node.dependencies.length === 0 && <div>None</div>)}
+        {!node || (node.dependencies.length === 0 && <div>None</div>) && fullDetails}
         <br />
-        <h6>Callsites</h6>
-        {callsites.map(binding => {
+        {fullDetails && <h6>Callsites</h6>}
+        {fullDetails && callsites.map(binding => {
           return (
             <NodeLink
               key={binding.key}
@@ -307,7 +298,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
             />
           );
         })}
-        {callsites.length === 0 && <div>None</div>}
+        {fullDetails && callsites.length === 0 && <div>None</div>}
       </div>
     </div>
   );

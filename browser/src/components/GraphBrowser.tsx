@@ -125,6 +125,7 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
                 weightService={weightService}
                 nodeName={decodeURIComponent(props.match.params.node as string)}
                 componentName={componentName}
+                fullDetails={true}
               />
             )}
           ></Route>

@@ -1,5 +1,5 @@
 import React from "react";
-import GraphManager from "../models/GraphManager";
+import GraphManager, { GraphMatchResult } from "../models/GraphManager";
 import { Link, useHistory } from "react-router-dom";
 import NodeLink from "./NodeLink";
 import Routes from "src/Routes";
@@ -108,13 +108,20 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
       </div>
     )
   }
-  // will partially display each nodes summary
-  if (searchResult.length > 1) {
-    {searchResult.map(element => {
-      if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
-        //TODO: If nodeName is CoffeeMaker && results list contains CoffeeMakerController & CoffeeMaker return CoffeeMaker
-      }
-    })}
+  if (searchResult.length > 1 && shortNameEqualsNodeName(searchResult, nodeName)) {
+    //return fullNode Summary if exactly 1 of the result nodes are equal to the short name of a node 
+    return (
+      <div>
+        {searchResult.map(element => {
+          if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
+            var prop : Props = {graphManager, weightService, componentName : element.componentName, nodeName : element.node.key, fullDetails: true}
+            return NodeSummary(prop)
+          }
+        })}
+      </div>
+    )
+  } else if (searchResult.length > 1) {
+    // will partially display each nodes summary
     return (
       <div>
         {searchResult.map(element => {
@@ -123,11 +130,29 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
         })}
       </div>
     )
-  }
+  } else {
+  //if searchResult is a length of 1, return the summary of the node
   var componentName = searchResult[0].componentName
   var nodeName: string = searchResult[0].node.key
   var prop: Props = {graphManager, weightService, componentName, nodeName, fullDetails : true}
   return NodeSummary(prop)
+  }
+}
+
+function shortNameEqualsNodeName(searchResult: GraphMatchResult[], nodeName: string) : boolean {
+  const displayNameHelper = new DisplayNameHelper()
+  //counts how many short names in the graph equals to nodeName 
+  var commonCount: number = 0
+  searchResult.map(element => {
+    if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
+      commonCount+=1
+    }
+  })
+  // return false if there are multiple short names equal to eachother or if no short name equal to the nodeName
+  if(commonCount > 1 || commonCount == 0){
+    return false
+  }
+  return true
 }
 
 export function NodeSummary({ graphManager, weightService, componentName, nodeName, fullDetails }: Props) {

@@ -160,7 +160,7 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
               node={node}
               weight={weightService.getWeight(componentName, node.key)}
               onSelect={() => 
-                {!fullDetails && history.push(Routes.GraphNode(componentName, node.key))}
+                history.push(Routes.GraphNode(componentName, node.key))
               }
               />
         </div>
@@ -254,7 +254,9 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
         )}
 
         <br />
-       {fullDetails && <h6>Dependencies
+  {fullDetails && 
+  <div> 
+        <h6>Dependencies
           &nbsp;|&nbsp;
           <Link
             className="soft-link"
@@ -262,8 +264,8 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
           >
           transitive
           </Link>
-        </h6>}
-        {fullDetails && node &&
+        </h6>
+        {node &&
           node.dependencies
             .map(d => ({
               node: graphManager.getNode(componentName, d.key),
@@ -284,10 +286,10 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
                 />
               );
             })}
-        {!node || (node.dependencies.length === 0 && <div>None</div>) && fullDetails}
+        {!node || (node.dependencies.length === 0 && <div>None</div>)}
         <br />
-        {fullDetails && <h6>Callsites</h6>}
-        {fullDetails && callsites.map(binding => {
+        <h6>Callsites</h6>
+        {callsites.map(binding => {
           return (
             <NodeLink
               key={binding.key}
@@ -298,7 +300,9 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
             />
           );
         })}
-        {fullDetails && callsites.length === 0 && <div>None</div>}
+        {callsites.length === 0 && <div>None</div>}
+        </div>
+        }
       </div>
     </div>
   );

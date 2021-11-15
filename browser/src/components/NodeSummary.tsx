@@ -109,8 +109,8 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
     )
   }
   if (searchResult.length > 1) {
-    //return fullNode Summary if exactly 1 of the result nodes are equal to the short name of a node 
-    if (shortNameEqualsNodeName(searchResult, nodeName)) {
+    //return full node Summary if exactly 1 of the result nodes are equal to the short name of a node 
+    if (displayFullSummary(searchResult, nodeName)) {
       return (
         <div>
           {searchResult.map(element => {
@@ -141,17 +141,12 @@ export function NodeSearch({ graphManager, weightService, nodeName }: SearchProp
   }
 }
 
-function shortNameEqualsNodeName(searchResult: GraphMatchResult[], nodeName: string) : boolean {
+function displayFullSummary(searchResult: GraphMatchResult[], nodeName: string) : boolean {
   const displayNameHelper = new DisplayNameHelper()
-  //counts how many short names in the graph equals to nodeName 
-  var commonCount: number = 0
-  searchResult.map(element => {
-    if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
-      commonCount+=1
-    }
-  })
-  // return false if there are multiple short names equal to eachother or if no short name equal to the nodeName
-  if(commonCount > 1 || commonCount == 0){
+  //counts how many short names in the graph equal to the nodeName 
+  var commonCount = searchResult.filter(element => displayNameHelper.displayNameForKey(element.node.key) == nodeName);
+  // return false if there isn't a unique shortName equal to the nodeName
+  if (commonCount.length != 1) {
     return false
   }
   return true

@@ -6,7 +6,6 @@ import Routes from "src/Routes";
 import { GraphSelector } from "./GraphSelector";
 import WeightService from "../service/WeightService";
 import { Node } from "src/models/Graph";
-import SubcomponentSummary from "./SubcomponentSummary";
 import DisplayNameHelper from "src/util/DisplayNameHelper";
 
 export type Props = {
@@ -98,58 +97,77 @@ function createdComponent(graphManager: GraphManager, componentName: string, nod
 
 export function NodeSearch({ graphManager, weightService, nodeName }: SearchProps) {
   //search for the top five choices the nodeName could be in the Graph based on the nodeName
-  var searchResult =  graphManager.getMatches( "", nodeName.trim().toLowerCase(), 5, false);
-  const displayNameHelper = new DisplayNameHelper()
-  // return if nodeName is not found in the graph
-  if (searchResult.length == 0) {
-    return (
-      <div>
-        Results for node name <strong><i>{nodeName}</i></strong> are not found in graph.
-      </div>
-    )
-  }
-  if (searchResult.length > 1) {
-    //return full node Summary if exactly 1 of the result nodes are equal to the short name of a node 
-    if (displayFullSummary(searchResult, nodeName)) {
-      return (
-        <div>
-          {searchResult.map(element => {
-            if(displayNameHelper.displayNameForKey(element.node.key) == nodeName){
-              var prop : Props = {graphManager, weightService, componentName : element.componentName, nodeName : element.node.key, fullDetails: true}
-              return NodeSummary(prop)
-            }
-          })}
-        </div>
-      )
+  //use component name in angle brackets as the nodeName
+    let searchResult: GraphMatchResult[] = searchHandler(nodeName, graphManager)
+    if(searchResult.length == 1) {
+      // return full summary for the one result found
+      var props: Props = {graphManager, weightService, componentName : searchResult[0].componentName, nodeName : searchResult[0].node.key, fullDetails : true}
+      return NodeSummary(props)
+    } else if (searchResult.length > 1) {
+      if (displayFullSummary(searchResult, nodeName)) {
+        // return full node Summary if exactly 1 of the result nodes are equal to the short name of a node 
+        const displayNameHelper = new DisplayNameHelper()
+        let uniqueName = searchResult.filter(component => displayNameHelper.displayNameForKey(component.node.key) == nodeName)
+        var props: Props = {graphManager, weightService, componentName : uniqueName[0].componentName, nodeName : uniqueName[0].node.key, fullDetails : true}
+        return NodeSummary(props)
+      } else {
+        // will partially display each nodes summary
+          return (
+            <div>
+              {searchResult.map(component => {
+                var prop : Props = {graphManager, weightService, componentName : component.componentName, nodeName : component.node.key, fullDetails: false}
+                return NodeSummary(prop)
+              })}
+            </div>
+          )
+      }
     } else {
-      // will partially display each nodes summary
+      // return if nodeName is not found in the graph
       return (
         <div>
-          {searchResult.map(element => {
-            var prop : Props = {graphManager, weightService, componentName : element.componentName, nodeName : element.node.key, fullDetails: false}
-            return NodeSummary(prop)
-          })}
+          Results for node name <strong><i>{nodeName}</i></strong> are not found in graph.
         </div>
       )
     }
-  } else {
-  //if searchResult is a length of 1, return the summary of the node
-  var componentName = searchResult[0].componentName
-  var nodeName: string = searchResult[0].node.key
-  var prop: Props = {graphManager, weightService, componentName, nodeName, fullDetails : true}
-  return NodeSummary(prop)
-  }
 }
 
 function displayFullSummary(searchResult: GraphMatchResult[], nodeName: string) : boolean {
   const displayNameHelper = new DisplayNameHelper()
   //counts how many short names in the graph equal to the nodeName 
-  var commonCount = searchResult.filter(element => displayNameHelper.displayNameForKey(element.node.key) == nodeName);
+  var commonCount = searchResult.filter(component => displayNameHelper.displayNameForKey(component.node.key) == nodeName);
   // return false if there isn't a unique shortName equal to the nodeName
   if (commonCount.length != 1) {
     return false
   }
   return true
+}
+
+function searchHandler(nodeName: string, graphManager: GraphManager): GraphMatchResult[] {
+  const displayNameHelper = new DisplayNameHelper()
+// replace angle brackets , annotation '@', & commas with ' ' to create tokens
+  nodeName = nodeName.replace('<', ' ')
+  nodeName = nodeName.replace('>', ' ')
+  nodeName = nodeName.replace(',', ' ')
+  nodeName = nodeName.replace('@', ' ')
+  // create list of tokens
+  let tokenList : string[] = nodeName.split(' ').filter(token => token != "")
+  // list of components found based on tokens
+  let resultComponents: GraphMatchResult[] = []
+  let setOfComponents: Set<string> = new Set()
+  tokenList.forEach(token => {
+    //get search results for each token
+    var searchResult: GraphMatchResult[] = graphManager.getMatches("", token, 40, false);
+    searchResult.forEach(component => {
+      // check if every token in tokenList is included in a component
+      let addComponent : boolean = tokenList.every(token => displayNameHelper.displayNameForKey(component.node.key).includes(token))
+      // do not add if component is a duplicate & components list < 5
+      if(addComponent && !setOfComponents.has(component.node.key) && resultComponents.length < 5){
+        resultComponents.push(component)
+          setOfComponents.add(component.node.key)
+      }
+    })
+  })
+  return resultComponents
 }
 
 export function NodeSummary({ graphManager, weightService, componentName, nodeName, fullDetails }: Props) {

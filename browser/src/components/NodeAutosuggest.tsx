@@ -5,6 +5,8 @@ import NodeWeight from "./NodeWeight";
 import WeightService from "../service/WeightService";
 import DisplayNameHelper from "../util/DisplayNameHelper";
 import "./NodeToolTip.css";
+import LinkImg from "../util/link.png"
+import Copy from "clipboard-copy"
 
 const MAX_SUGGESTIONS = 40;
 
@@ -73,7 +75,9 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
                 : ""}
             </span>
             {displayNameHelper.displayNameForKey(suggestion.node.key)} 
-              <span className="tooltiptext_suggest">{suggestion.node.key}</span>
+              <span className="tooltiptext_suggest" onClick={() => Copy(suggestion.node.key)}>
+                <img src = {LinkImg} height = {12} width = {12}/> &nbsp; {suggestion.node.key}
+              </span>
             <NodeWeight
               weight={weightService.getWeight(
                 suggestion.componentName,

@@ -5,6 +5,8 @@ import NodeIcon from "./NodeIcon";
 import NodeWeight from "./NodeWeight";
 import DisplayNameHelper from "../util/DisplayNameHelper";
 import "./NodeToolTip.css";
+import LinkImg from "../util/link.png"
+import Copy from "clipboard-copy"
 
 type Props = {
   node: Node;
@@ -31,16 +33,18 @@ const NodeLink: React.FC<Props> = ({
 }: Props) => {
   const scope = node.scope ? `[${node.scope.split(".").pop()}]` : "";
   const displayNameHelper = new DisplayNameHelper()
-  return (<div>
+  return (<div className="tooltip_link">
     <div
       className="binding"
       onClick={() => onSelect && onSelect(node.key)}
     >
-      <div className="tooltip_link">
+      <div>
         <NodeIcon kind={kind || node.kind} />
         {scoped && <span className="light-text">{scope}&nbsp;</span>}
         {displayNameHelper.displayNameForKey(getDisplayName(node.key))}
-              <span className="tooltiptext_link">{node.key}</span>
+              <span className="tooltiptext_link" onClick={() => Copy(node.key)}>
+                <img src = {LinkImg} height = {12} width = {12}/> &nbsp; {node.key}
+              </span>
       </div>
       <div>
         <CodeLink link={node.key} />

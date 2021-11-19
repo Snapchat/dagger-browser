@@ -148,7 +148,6 @@ function searchHandler(nodeName: string, graphManager: GraphManager): GraphMatch
   nodeName = nodeName.replace(/<|>|@|,/g,' ');
   // create list of tokens
   let tokenList : string[] = nodeName.split(' ').filter(token => token != "")
-  console.log(tokenList)
   // list of components found based on tokens
   let resultComponents: GraphMatchResult[] = []
   let setOfComponents: Set<string> = new Set()

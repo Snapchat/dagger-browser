@@ -145,12 +145,10 @@ function displayFullSummary(searchResult: GraphMatchResult[], nodeName: string) 
 function searchHandler(nodeName: string, graphManager: GraphManager): GraphMatchResult[] {
   const displayNameHelper = new DisplayNameHelper()
 // replace angle brackets , annotation '@', & commas with ' ' to create tokens
-  nodeName = nodeName.replace('<', ' ')
-  nodeName = nodeName.replace('>', ' ')
-  nodeName = nodeName.replace(',', ' ')
-  nodeName = nodeName.replace('@', ' ')
+  nodeName = nodeName.replace(/<|>|@|,/g,' ');
   // create list of tokens
   let tokenList : string[] = nodeName.split(' ').filter(token => token != "")
+  console.log(tokenList)
   // list of components found based on tokens
   let resultComponents: GraphMatchResult[] = []
   let setOfComponents: Set<string> = new Set()

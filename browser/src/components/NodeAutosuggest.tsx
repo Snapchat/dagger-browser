@@ -51,6 +51,20 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
       searchRef.current.input.focus();
   };
 
+  const CopiedComponent = () => {
+    useEffect(() => {
+      // component will hide after 5 seconds
+      const timer = setTimeout(() => copyHandler(false), 5000);
+      return () => clearTimeout(timer);
+    }, []);
+    return (
+      <div className = "copiedTextAutosuggest">
+        <span>Copied Component</span>
+        <br/>
+      </div>
+    );
+  }
+
   useEffect(() => {
     autoFocusInput();
     window.addEventListener("keydown", autoFocusInput);
@@ -98,7 +112,7 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
           }
         }}
       />
-      {copiedFullName && <span>Copied Component Below!</span>}
+      {copiedFullName && <CopiedComponent/>}
       </div>
   );
 };

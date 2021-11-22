@@ -34,7 +34,8 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
   const [query, setQuery] = useState("");
   const searchRef = useRef<Autosuggest<GraphMatchResult>>(null);
   const displayNameHelper = new DisplayNameHelper()
-  
+  const [copiedFullName , copyHandler ]  = useState(false)
+
   const suggestions = useMemo(
     () => getSuggestions(graphManager, componentName || "", query),
     [graphManager, componentName, query]
@@ -57,6 +58,7 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
   }, []);
 
   return (
+    <div>
       <Autosuggest<GraphMatchResult>
         ref={searchRef}
         suggestions={suggestions}
@@ -73,10 +75,12 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
               {suggestion.componentName
                 ? "[" + suggestion.componentName.split(".").pop() + "] "
                 : ""}
+                {copyHandler(false)}
             </span>
             {displayNameHelper.displayNameForKey(suggestion.node.key)} 
-              <span className="tooltiptext_suggest" onClick={() => Copy(suggestion.node.key)}>
-                <img src = {LinkImg} height = {12} width = {12}/> &nbsp; {suggestion.node.key}
+              <span className="tooltiptext_suggest"  onClick={ () => Copy(suggestion.node.key)}>
+                <img src = {LinkImg} height = {12} width = {12} onClick={ () => copyHandler(true)}
+                /> &nbsp;{suggestion.node.key} 
               </span>
             <NodeWeight
               weight={weightService.getWeight(
@@ -94,6 +98,8 @@ const NodeAutosuggest = ({ graphManager, weightService, onSelect, componentName 
           }
         }}
       />
+      {copiedFullName && <span>Copied Component Below!</span>}
+      </div>
   );
 };
 

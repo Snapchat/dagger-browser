@@ -62,7 +62,7 @@ export class DisplayNameHelper {
             else if (token_c === token_c.toUpperCase() && token_c.match(/[A-Z]/i)) {
                 processed_token += token_c
                 i++
-                while (i < token.length && token.charAt(i) != ' ' && token.charAt(i).match(/[a-zA-Z.]/i)) {
+                while (i < token.length && token.charAt(i) != ' ' && token.charAt(i).match(/[a-zA-Z0-9.]/i)) {
                     processed_token+= token.charAt(i)
                     i++
                 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Node, Weight } from "../models/Graph";
 import CodeLink from "./CodeLink";
 import NodeIcon from "./NodeIcon";
@@ -33,17 +33,32 @@ const NodeLink: React.FC<Props> = ({
 }: Props) => {
   const scope = node.scope ? `[${node.scope.split(".").pop()}]` : "";
   const displayNameHelper = new DisplayNameHelper()
+  const [copiedFullName , copyHandler ]  = React.useState(false)
+  const CopiedComponent = ()  => {
+    useEffect(() => {
+      // component will hide after 5 seconds
+      const timer = setTimeout(() => copyHandler(false), 5000);
+      return () => clearTimeout(timer);
+    }, []);
+    return (
+      <div className = "copiedTextLink">
+        <span>Copied Component!</span>
+        <br/>
+      </div>
+    );
+  }
   return (<div className="tooltip_link">
-    <div
-      className="binding"
-      onClick={() => onSelect && onSelect(node.key)}
-    >
+    <div className="binding">
       <div>
         <NodeIcon kind={kind || node.kind} />
         {scoped && <span className="light-text">{scope}&nbsp;</span>}
-        {displayNameHelper.displayNameForKey(getDisplayName(node.key))}
+        <span onClick={() => onSelect && onSelect(node.key)} >{displayNameHelper.displayNameForKey(getDisplayName(node.key))}</span>
               <span className="tooltiptext_link" onClick={() => Copy(node.key)}>
-                <img src = {LinkImg} height = {12} width = {12}/> &nbsp; {node.key}
+                <img src = {LinkImg} height = {12} width = {12} onMouseLeave = {() => copyHandler(false)} 
+                onClick = {() => {copyHandler(true)
+                }}/> 
+                {copiedFullName && <CopiedComponent/>}
+                &nbsp; {node.key}
               </span>
       </div>
       <div>

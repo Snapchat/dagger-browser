@@ -70,3 +70,44 @@
     transition: opacity  0s linear 500ms;
     visibility: visible;
 }
+
+.copiedTextAutosuggest {
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin-left: 30%;
+    border-style: solid;
+    border-width: thin;
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    position:fixed;
+    z-index: 1;
+}
+
+.copiedTextLink {
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    border-style: solid;
+    border-width: thin;
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    position:absolute;
+    z-index: 1;
+    margin-top: 2%;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

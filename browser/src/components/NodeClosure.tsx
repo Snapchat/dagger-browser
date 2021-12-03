@@ -4,6 +4,9 @@ import { Node } from "../models/Graph";
 import GraphManager from "../models/GraphManager";
 import Routes from "src/Routes";
 import NodeLink from "./NodeLink";
+import DisplayNameHelper from "../util/DisplayNameHelper";
+import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem } from '@coreui/react'
+import '@coreui/coreui/dist/css/coreui.min.css'
 
 const NO_SCOPE = "@"
 
@@ -17,6 +20,40 @@ type Dependencies = {
   bindings: { [key:string]:Node[]; }
   modules: { [key:string]:Node[]; }
   moduleSummary: { [key:string]:number; }
+  mapOfNodes : Map<string, string[]>
+}
+
+function FileSystemComponent (mapOfNodes:  Map<string, string[]>, nodeName: string)  {
+  const displayNameHelper = new DisplayNameHelper()
+  return (
+    <div>
+      {mapOfNodes.get(displayNameHelper.displayNameForKey(nodeName))?.map(node => {
+        if (mapOfNodes.get(node)?.length != 0) { 
+          return (
+            <CAccordion>
+            <CAccordionItem>
+              <CAccordionHeader>
+                {displayNameHelper.displayNameForKey(node)}
+              </CAccordionHeader>
+              <CAccordionBody>
+                {FileSystemComponent(mapOfNodes, displayNameHelper.displayNameForKey(node))}
+              </CAccordionBody>
+            </CAccordionItem>
+            </CAccordion>
+          )
+        } else {
+          return (
+            <div>
+             <CAccordionBody>
+                <span >{node}</span>
+            </CAccordionBody>
+            </div>
+          ) 
+          }
+        })
+        }
+    </div>
+  )
 }
 
 export default function NodeClosure({ graphManager, componentName, nodeName }: Props) {
@@ -30,6 +67,8 @@ export default function NodeClosure({ graphManager, componentName, nodeName }: P
   const modules = Object.keys(dependencies.modules);
 
   const history = useHistory();
+  const displayNameHelper = new DisplayNameHelper()
+  const mapOfComponents = dependencies.mapOfNodes
 
   return (
     <div className="card">
@@ -37,6 +76,20 @@ export default function NodeClosure({ graphManager, componentName, nodeName }: P
         <div className="card-title">
           Transitive Dependencies: {nodeName}
         </div>      
+
+        <div className="card-title">
+            Graph:
+        </div> 
+        <CAccordion>
+          <CAccordionItem >
+            <CAccordionHeader>
+              {displayNameHelper.displayNameForKey(nodeName)}
+            </CAccordionHeader>
+            <CAccordionBody>
+              {FileSystemComponent(mapOfComponents, displayNameHelper.displayNameForKey(nodeName))}
+            </CAccordionBody>
+          </CAccordionItem>
+        </CAccordion>
 
         {scopedDependencies.length > 0 && (
           <div>
@@ -100,7 +153,8 @@ function getDependencies(graphManager: GraphManager, componentName: string, node
   const bindings: { [key:string]:Node[]; } = {}
   const moduleBindings: { [key:string]:Node[]; } = {}
   const moduleSummary: { [key:string]:number } = {}
-
+  const mapOfNodes : Map<string, string[]> = new Map()
+  const displayNameHelper = new DisplayNameHelper()
 
   // Module overviews
   graphManager.getComponent(componentName).nodes.forEach(node => {
@@ -120,6 +174,16 @@ function getDependencies(graphManager: GraphManager, componentName: string, node
     
     const binding = graphManager.getNode(componentName, bindingKey)
     if (binding) {
+      // construct graph
+      let listOfDependencies: string[] = []
+      binding.dependencies.forEach(depedency => {
+        if (!visited[depedency.key]) {
+          listOfDependencies.push(displayNameHelper.displayNameForKey(depedency.key))
+          queue.push(depedency.key)
+        }
+      })
+      mapOfNodes.set(displayNameHelper.displayNameForKey(bindingKey), listOfDependencies)
+        
       // Add this binding to our output
       if (binding.module) {
         var mb = moduleBindings[binding.module] || (moduleBindings[binding.module] = [])
@@ -139,7 +203,8 @@ function getDependencies(graphManager: GraphManager, componentName: string, node
   return {
     bindings: bindings,
     modules: moduleBindings,
-    moduleSummary: moduleSummary
+    moduleSummary: moduleSummary,
+    mapOfNodes: mapOfNodes
   }
 }
 

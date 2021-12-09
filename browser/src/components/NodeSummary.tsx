@@ -299,7 +299,14 @@ export function NodeSummary({ graphManager, weightService, componentName, nodeNa
             className="soft-link"
             to={Routes.GraphClosure(componentName, node.key)}
           >
-          transitive
+          Transitive
+          </Link>
+          &nbsp;|&nbsp;
+          <Link
+            className="soft-link"
+            to={Routes.Tree(componentName, node.key)}
+          >
+          Tree
           </Link>
         </h6>
         {node &&

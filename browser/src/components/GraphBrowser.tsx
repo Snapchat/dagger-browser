@@ -16,6 +16,7 @@ import WeightServiceManager from "../service/WeightServiceManager";
 import classNames from "classnames";
 import "./GraphBrowser.css";
 import Config from "src/models/Config";
+import TreeView from "src/components/TreeView"
 
 interface Props {
   graphManager: GraphManager;
@@ -101,6 +102,16 @@ export const GraphBrowser = ({ graphManager, weightServiceManager, componentName
             path={Paths.GraphClosure}
             render={props => (
               <NodeClosure
+                graphManager={graphManager}
+                nodeName={decodeURIComponent(props.match.params.key as string)}
+                componentName={componentName}
+              />
+            )}
+          ></Route>
+          <Route
+            path={Paths.Tree}
+            render={props => (
+              <TreeView
                 graphManager={graphManager}
                 nodeName={decodeURIComponent(props.match.params.key as string)}
                 componentName={componentName}

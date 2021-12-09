@@ -36,11 +36,12 @@ export function BrowserHeader({ manifestUrl, onChangeManifestUrl }: Props) {
               onOpenStart: null,
               outDuration: 250
             }}
-            trigger={<a href="#!"><Icon right>settings</Icon></a>}
+            trigger={<a href="#!" className="settings-icon"><Icon right>settings</Icon></a>}
           >
-            <LoadManifestModal onChangeManifestUrl={onChangeManifestUrl} trigger={<a href="#">Load manifest from URL</a>} />
+            <LoadManifestModal onChangeManifestUrl={onChangeManifestUrl} trigger={<a href="#" className="manifest-model">Load manifest from URL</a>} />
             <a href={manifestUrl}
               target="_blank"
+              className="manifest-model"
               title="Download JSON">
               Download manifest
             </a>

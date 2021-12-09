@@ -4,6 +4,8 @@
   "homepage": "./",
   "private": true,
   "dependencies": {
+    "@coreui/coreui": "^4.1.0",
+    "@coreui/react": "^4.1.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
     "@types/classnames": "^2.2.9",

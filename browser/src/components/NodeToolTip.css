@@ -111,3 +111,38 @@
         opacity: 1;
     }
 }
+
+.tooltip_tree {
+    position: relative;
+}
+  
+.tooltip_tree .tooltiptext_tree {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 18%;
+    opacity: 0;
+}
+
+.tooltip_tree .tooltiptext_tree::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+  }
+  
+.tooltip_tree:hover .tooltiptext_tree {
+    opacity: 1;
+    transition: opacity  0s linear 500ms;
+    visibility: visible;
+}

@@ -41,6 +41,7 @@ code {
 
 .binding a {
   color: rgba(0,0,0,0.87) !important;
+  text-decoration: none;
 }
 
 .binding .text:hover {
@@ -81,6 +82,9 @@ code {
 .soft-link {
   color: rgba(0, 0, 0, 0.87);
   text-decoration: underline;
+}
+.soft-link:hover {
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .material-icons {
@@ -142,4 +146,12 @@ code {
   background-color: #ee6e73;
   font-size:  30px;
   color: white;
+}
+
+.brand-logo, .manifest-model {
+  text-decoration: none;
+}
+
+.brand-logo:hover , .settings-icon:hover {
+  color: #fff;
 }

@@ -100,6 +100,7 @@ function getDependencies(graphManager: GraphManager, componentName: string, node
   const bindings: { [key:string]:Node[]; } = {}
   const moduleBindings: { [key:string]:Node[]; } = {}
   const moduleSummary: { [key:string]:number } = {}
+  
 
   // Module overviews
   graphManager.getComponent(componentName).nodes.forEach(node => {
@@ -138,7 +139,7 @@ function getDependencies(graphManager: GraphManager, componentName: string, node
   return {
     bindings: bindings,
     modules: moduleBindings,
-    moduleSummary: moduleSummary,
+    moduleSummary: moduleSummary
   }
 }
 

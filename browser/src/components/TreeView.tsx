@@ -6,10 +6,6 @@ import WeightService from "../service/WeightService";
 import NodeWeight from "./NodeWeight";
 import NodeIcon from "./NodeIcon";
 import DisplayNameHelper from "../util/DisplayNameHelper";
-import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem } from '@coreui/react'
-import '@coreui/coreui/dist/css/coreui.min.css'
-import LinkImg from "../util/link.png"
-import Copy from "clipboard-copy"
 import { MDBContainer, MDBCol, MDBTreeview, MDBTreeviewList, MDBTreeviewItem } from 'mdbreact';
 
 type Props = {
@@ -21,89 +17,6 @@ type Props = {
 
 type GraphOfNodes = {
   mapOfNodes : Map<string, string[]>
-}
-
-function CAccordionFileSystemComponent (mapOfNodes:  Map<string, string[]>, nodeName: string, componentName: string, graphManager: GraphManager,   weightService: WeightService)  {
-  const displayNameHelper = new DisplayNameHelper()
-  const [copiedFullName , copyHandler ]  = useState(false)
-  // only display copy component if it's copied
-  const [nameOfComponentCopied , nameHandler ]  = useState("")
-  const history = useHistory();
-  const rootNode = graphManager.getNode(componentName, nodeName)
-  const dependenciesIconMap: Map<string,string> = new Map()
-  if(rootNode && rootNode.dependencies.length > 0) {
-    rootNode.dependencies.map(node => {
-      dependenciesIconMap.set(node.key, node.kind)
-    })
-  }
-  const CopiedComponent = () => {
-    useEffect(() => {
-      // component will hide after 2 seconds
-      const timer = setTimeout(() => copyHandler(false), 2000);
-      return () => clearTimeout(timer);
-    }, []);    
-    return (
-      <div className = "copiedTextAutosuggest">
-        <span>Copied Component</span>
-        <br/>
-      </div>
-    );
-  }
-  
-  return (
-    <div>
-      {mapOfNodes.get(nodeName)?.map(node => {       
-        let isInstance : string = ""
-        if(dependenciesIconMap.get(node) && dependenciesIconMap.get(node) == "INSTANCE") {
-          isInstance = "INSTANCE"
-        }
-        let weight = weightService.getWeight(componentName, node)
-          if (mapOfNodes.get(node)?.length != 0) { 
-            return (
-              <CAccordion activeItemKey = {"INSTANCE"}>
-                <CAccordionItem itemKey = {isInstance}>
-                  <div className="tooltip_tree" onMouseEnter = {() => nameHandler(node)}>
-                      <CAccordionHeader>
-                        <NodeIcon kind = {dependenciesIconMap.get(node)}/>
-                        <span onClick={() => history.push(Routes.GraphNode(componentName, node))}>
-                          {displayNameHelper.displayNameForKey(node)}
-                        </span>
-                        <span className="tooltiptext_tree"  onClick={() => Copy(node)}>
-                          <img src = {LinkImg} height = {12} width = {12} onClick={() => copyHandler(true)}/>
-                          &nbsp;{node} 
-                        </span>
-                        <NodeWeight weight={weight} />
-                        {copiedFullName && node == nameOfComponentCopied && <CopiedComponent/>}
-                      </CAccordionHeader>
-                  </div>
-                  <CAccordionBody>
-                    {CAccordionFileSystemComponent(mapOfNodes, node, componentName, graphManager, weightService)}
-                  </CAccordionBody>
-                </CAccordionItem>
-              </CAccordion>
-            )
-          } else {
-            return (
-              <div className="tooltip_tree" onMouseEnter = {() => nameHandler(node)}>
-              <CAccordionBody>
-                  <NodeIcon kind = {dependenciesIconMap.get(node)}/>
-                  <span onClick={() => history.push(Routes.GraphNode(componentName, node))}>
-                    {displayNameHelper.displayNameForKey(node)}
-                  </span>
-                  <span className="tooltiptext_tree" onClick={() => Copy(node)}>
-                      <img src = {LinkImg} height = {12} width = {12} onClick={() => copyHandler(true)}/> 
-                      &nbsp;{node}
-                  </span>
-                  <NodeWeight weight={weight} />
-                  {copiedFullName && node == nameOfComponentCopied && <CopiedComponent/>}
-              </CAccordionBody>
-              </div>
-            )
-          }
-        })
-      }
-    </div>
-  )
 }
 
 function MDBFileSystemComponentNew (mapOfNodes:  Map<string, string[]>, nodeName: string, componentName: string, graphManager: GraphManager,   weightService: WeightService)  {

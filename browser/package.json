@@ -17,6 +17,7 @@
     "@types/react-router-dom": "^5.1.0",
     "@types/react-select": "^3.0.5",
     "axios": "^0.21.1",
+    "mdbreact": "4.27.0",
     "classnames": "^2.2.6",
     "clipboard-copy": "^4.0.1",
     "jest": "^27.2.1",

@@ -40,8 +40,12 @@ export default class GraphManager {
       // classInfo is optional
     }
     try {
-      let manifestResponse = await axios.get(manifestUrl, {'decompress': true })      
+      let manifestResponse = await axios.get(manifestUrl, {'decompress': true }) 
+      console.log("inc response")
+      console.log(manifestResponse.data);
       this.componentSet = manifestResponse.data as ComponentSet;
+      console.log("component set")
+      console.log(this.componentSet);
       this.populateCaches();
     } catch {
       return false;

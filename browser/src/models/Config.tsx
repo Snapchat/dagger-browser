@@ -19,5 +19,6 @@ export default {
   TITLE: data.title || "Graph Browser",
   REPO_URL: data.repo_url || "",
   PUBLIC_URL: process.env.PUBLIC_URL || "",
-  COMPONENTS_MANIFEST_JSON_URL: (process.env.PUBLIC_URL || "") + '/ComponentsManifest.json.gz'
+  COMPONENTS_MANIFEST_JSON_URL: (process.env.PUBLIC_URL || "") + '/ComponentsManifest.json',
+  COMPONENTS_MANIFEST_GZIP_URL: (process.env.PUBLIC_URL || "") + '/ComponentsManifest.json.gz'
 } as Config;

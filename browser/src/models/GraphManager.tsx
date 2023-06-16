@@ -17,6 +17,7 @@ const SUBCOMPONENT_SMALL_THRESHOLD = 10;
  */
 export default class GraphManager {
   manifestUrl?: string;
+  gzippedManifestUrl?: string;
   classInfoUrl?: string;
 
   componentSet: ComponentSet = { components: [] };
@@ -31,7 +32,7 @@ export default class GraphManager {
     [componentName: string]: { [key: string]: Node[] };
   } = {};
 
-  async loadUrl(manifestUrl: string): Promise<boolean> {
+  async loadUrl(manifestUrl: string, gzippedManifestUrl: string): Promise<boolean> {
     let classInfoUrl = manifestUrl.substring(0, manifestUrl.lastIndexOf("\/") + 1) + "ClassInfo.json";    
 
     try {
@@ -41,7 +42,12 @@ export default class GraphManager {
       // classInfo is optional
     }
     try {
-      let manifestResponse = await axios.get(manifestUrl, {responseType: 'arraybuffer', 'decompress': true }) 
+      let manifestResponse = {}
+      try {
+        manifestResponse = await axios.get(manifestUrl)
+      } catch {
+        manifestResponse = await axios.get(gzippedManifestUrl, {responseType: 'arraybuffer', 'decompress': true })
+      }
       this.componentSet = JSON.parse(pako.inflate(manifestResponse.data, { to: 'string' })) as ComponentSet;
       this.populateCaches();
     } catch {
@@ -49,6 +55,7 @@ export default class GraphManager {
     }
 
     this.manifestUrl = manifestUrl;
+    this.gzippedManifestUrl = gzippedManifestUrl;
     this.classInfoUrl = classInfoUrl;
     return true;
   }

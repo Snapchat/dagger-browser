@@ -44,7 +44,7 @@ export default class GraphManager {
       let manifestResponse = await axios.get(manifestUrl, {responseType: 'arraybuffer', 'decompress': true }) 
       console.log("inc response");
       console.log(manifestResponse.status);
-      this.componentSet = pako.inflate(manifestResponse.data, { to: 'string' }) as ComponentSet;
+      this.componentSet = JSON.parse(pako.inflate(manifestResponse.data, { to: 'string' })) as ComponentSet;
       console.log("component set")
       console.log(this.componentSet);
       this.populateCaches();

@@ -1,6 +1,7 @@
 import GraphReducer from "./GraphReducer";
 import ComponentSet, { Node, Component, Module, Scope, Weight } from "./Graph";
 import axios from "axios";
+import pako from "pako";
 import { ClassInfo } from "./ClassSize";
 import Config from "./Config";
 
@@ -40,10 +41,10 @@ export default class GraphManager {
       // classInfo is optional
     }
     try {
-      let manifestResponse = await axios.get(manifestUrl, {responseType: 'json', 'decompress': true }) 
-      console.log("inc response")
-      console.log(manifestResponse.data);
-      this.componentSet = manifestResponse.data as ComponentSet;
+      let manifestResponse = await axios.get(manifestUrl, {responseType: 'arraybuffer', 'decompress': true }) 
+      console.log("inc response");
+      console.log(manifestResponse.status);
+      this.componentSet = pako.inflate(manifestResponse.data, { to: 'string' }) as ComponentSet;
       console.log("component set")
       console.log(this.componentSet);
       this.populateCaches();

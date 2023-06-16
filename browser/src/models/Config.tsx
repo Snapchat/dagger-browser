@@ -13,6 +13,8 @@ interface Config {
   PUBLIC_URL: string;
   // Components manifest url
   COMPONENTS_MANIFEST_JSON_URL: string;
+  // Components manifest gzip url (handle both unzipped and gzipped cases)
+  COMPONENTS_MANIFEST_GZIP_URL: string;
 }
 
 export default {

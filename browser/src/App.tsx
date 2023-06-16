@@ -12,7 +12,6 @@ import Config from "./models/Config";
 
 interface AppState {
   manifestUrl?: string;
-  gzippedManifestUrl?: string;
   manifestFile?: File
   loadedManifest: boolean;
   weightServiceManager?: WeightServiceManager
@@ -25,7 +24,6 @@ class App extends React.Component<any, AppState> {
     super(props);
     this.state = {
       manifestUrl: Config.COMPONENTS_MANIFEST_JSON_URL,
-      gzippedManifestUrl: Config.COMPONENTS_MANIFEST_GZIP_URL,
       loadedManifest: false
     };
   }
@@ -47,7 +45,7 @@ class App extends React.Component<any, AppState> {
           loadedManifest: true
         }) 
       } else if (this.state.manifestUrl) {
-        const success = await this.graphManager.loadUrl(this.state.manifestUrl, this.state.gzippedManifestUrl);
+        const success = await this.graphManager.loadUrl(this.state.manifestUrl, Config.COMPONENTS_MANIFEST_GZIP_URL);
         this.setState({
           weightServiceManager: success ? new WeightServiceManager(this.graphManager) : undefined,
           loadedManifest: true

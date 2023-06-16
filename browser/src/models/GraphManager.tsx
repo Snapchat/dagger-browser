@@ -40,7 +40,7 @@ export default class GraphManager {
       // classInfo is optional
     }
     try {
-      let manifestResponse = await axios.get(manifestUrl, {responseType: 'arraybuffer', 'decompress': true }) 
+      let manifestResponse = await axios.get(manifestUrl, {responseType: 'json', 'decompress': true }) 
       console.log("inc response")
       console.log(manifestResponse.data);
       this.componentSet = manifestResponse.data as ComponentSet;

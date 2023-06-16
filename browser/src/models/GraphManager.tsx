@@ -42,13 +42,13 @@ export default class GraphManager {
       // classInfo is optional
     }
     try {
-      let manifestResponse: any = {}
       try {
-        manifestResponse = await axios.get(manifestUrl)
+        let manifestResponse = await axios.get(manifestUrl)
+        this.componentSet = manifestResponse.data as ComponentSet;
       } catch {
-        manifestResponse = await axios.get(gzippedManifestUrl, {responseType: 'arraybuffer', 'decompress': true })
+        let manifestResponse = await axios.get(gzippedManifestUrl, {responseType: 'arraybuffer', 'decompress': true })
+        this.componentSet = JSON.parse(pako.inflate(manifestResponse.data, { to: 'string' })) as ComponentSet;
       }
-      this.componentSet = JSON.parse(pako.inflate(manifestResponse.data, { to: 'string' })) as ComponentSet;
       this.populateCaches();
     } catch {
       return false;

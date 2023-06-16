@@ -4,7 +4,7 @@ import Spinner from 'react-spinner-material';
 export const GraphSpinner = () => {
   return (
     <div className="graph-spinner">
-        <Spinner size={30} spinnerColor={"#ee6e73"} spinnerWidth={3} visible={true} radius={""} color={""} stroke={""} />
+        <Spinner visible={true} radius={"30"} color={"#ee6e73"} stroke={"3"} />
     </div>
   );
 };

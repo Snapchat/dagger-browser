@@ -42,7 +42,7 @@ export default class GraphManager {
       // classInfo is optional
     }
     try {
-      let manifestResponse = {}
+      let manifestResponse: any = {}
       try {
         manifestResponse = await axios.get(manifestUrl)
       } catch {

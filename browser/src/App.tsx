@@ -45,7 +45,7 @@ class App extends React.Component<any, AppState> {
           loadedManifest: true
         }) 
       } else if (this.state.manifestUrl) {
-        const success = await this.graphManager.loadUrl(this.state.manifestUrl);
+        const success = await this.graphManager.loadUrl(this.state.manifestUrl, Config.COMPONENTS_MANIFEST_GZIP_URL);
         this.setState({
           weightServiceManager: success ? new WeightServiceManager(this.graphManager) : undefined,
           loadedManifest: true

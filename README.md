@@ -1,6 +1,6 @@
 # Dagger Browser
 
-Dagger Browser is a progressive web app for easily navigating a project's Dagger graph. The graph data is populated from a Dagger [SPI](https://dagger.dev/spi.html) plugin, and the browser is built using
+Dagger Browser is a progressive web app for easily navigating a project's Dagger graph. The graph data is populated from a Dagger [SPI](https://dagger.dev/dev-guide/spi.html) plugin, and the browser is built using
 [CRA (create-react-app)](https://github.com/facebook/create-react-app) with Typescript.
 
 <img src="docs/plaid_screenshot.png" width="600" />

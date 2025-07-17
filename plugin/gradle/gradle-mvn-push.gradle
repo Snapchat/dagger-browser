@@ -79,7 +79,16 @@ afterEvaluate { project ->
   }
 
     signing {
-        required { isReleaseBuild() && gradle.taskGraph.hasTask("publishing") }
+        required { 
+          logger.lifecycle("has task? " + gradle.taskGraph.hasTask("publishing") )
+          isReleaseBuild() && gradle.taskGraph.hasTask("publishing") 
+        }
+        logger.lifecycle("key id? " + SONATYPE_SIGNING_KEY_ID)
+        logger.lifecycle("key pw? " + SONATYPE_SIGNING_PASSWORD)
+        logger.lifecycle("key file? " + SONATYPE_SIGNING_KEYRING_FILE)
+        keyId SONATYPE_SIGNING_KEY_ID
+        password SONATYPE_SIGNING_PASSWORD
+        secretKeyRingFile SONATYPE_SIGNING_KEYRING_FILE
         sign configurations.archives
     }
 
